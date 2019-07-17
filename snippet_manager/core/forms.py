@@ -1,5 +1,10 @@
 from django import forms
+from django.forms.widgets import Widget
 from core.models import Language
+
+# class codeField(Widget):
+
+
 
 class addSnippet(forms.Form):
     title = forms.CharField(max_length=100, min_length=1)
@@ -8,3 +13,4 @@ class addSnippet(forms.Form):
     code = forms.CharField(widget=forms.Textarea, required=True, strip=False)
 
 
+# class editSnippet(forms.Form):
