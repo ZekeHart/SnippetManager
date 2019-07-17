@@ -7,6 +7,7 @@ from django.urls import reverse
 
 class Language (models.Model):
     name = models.CharField(max_length=50, help_text="The language this snippet is written in.")
+    code = models.CharField(max_length=10, help_text="code used with prism", null=True)
 
     def __str__(self):
         return f'{self.name}'
