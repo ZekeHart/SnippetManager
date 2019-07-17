@@ -7,9 +7,18 @@ from django.urls import reverse
 
 from core.forms import addSnippet
 from core.models import Snippet, Language
-# Create your views here.
+
 def index(request):
-    return render(request, 'index.html')
+
+    if request.method == "GET":
+        search_text = request.GET.get('search_text', '')
+        if search_text is not None and search_text != u"":
+            search_text = request.GET.get('search_text', '')
+            snippets = Snippet.objects.filter(title__contains = search_text)
+        else:
+            snippets = []
+
+        return render(request, 'index.html', {'snippets':snippets})
 
 
 @login_required

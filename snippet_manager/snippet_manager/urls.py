@@ -27,4 +27,6 @@ urlpatterns = [
     path('accounts/', include('allauth.urls')),
     path('user/<username>/', views.user_home, name='user-home'),
 
-] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+]
+
+urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
