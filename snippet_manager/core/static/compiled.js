@@ -6,6 +6,16 @@ let cleanSearch
 const searchButton = document.querySelector('#searchButton')
 const searchBox = document.querySelector('#searchBox')
 
+function displayResults (key) {
+    const resultsDiv = document.createElement('div')
+    resultsDiv.classList.add('individualResult')
+    resultsDiv.innerHTML = `
+	<p><strong>${key.title}</strong> | added on: ${key.date}</p>
+    <pre class='line-numbers'><code class="language-${key.language.code }"><strong>### ${key.language.name } ###</strong>
+    `
+    return resultsDiv
+}
+
 searchButton.addEventListener('click', function () {
     searchBox.querySelector('input').focus()
     searchTerm = searchBox.querySelector('input').value
@@ -17,7 +27,7 @@ searchButton.addEventListener('click', function () {
     })
         .then(function (data) {
             results.innerHTML = ''
-            for (let key of data.results) {
+            for (let key of data) {
                 results.appendChild(displayResults(key))
             }
         })
