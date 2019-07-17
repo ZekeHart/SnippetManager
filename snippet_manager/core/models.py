@@ -20,6 +20,8 @@ class Snippet (models.Model):
     code = models.TextField()
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
 
+    original = models.ForeignKey('self', on_delete=models.SET_NULL, null=True, blank=True)
+
     def get_absolute_url(self):
         return reverse('snippet', args=[str(self.pk)])
 

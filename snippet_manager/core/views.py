@@ -33,6 +33,7 @@ def add_snippet(request):
 
     context = {
         'form': form,
+        'code': form['code'],
     }
 
     return render(request, 'add_snippet.html', context=context)
