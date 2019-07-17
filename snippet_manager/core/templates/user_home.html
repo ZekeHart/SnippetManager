@@ -1,10 +1,16 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block content %}
 <h1>{{ user.get_username }}</h1>
     {% if snippets %}
         {% for snippet in snippets %}
-            <p>{{ snippet.title}} | {{ snippet.language.name }} | added on: {{ snippet.date }}</p>
+        <div class="snippet">
+            <p><strong>{{ snippet.title}}</strong> | added on: {{ snippet.date }}</p>
+            <pre class='line-numbers'><code class="language-{{ snippet.language.code }}"><strong>### {{ snippet.language.name }} ###</strong>
+
+{{ snippet.code }}</code></pre>
+        </div>
         {% endfor %}
     {% endif %}
 {% endblock %}
