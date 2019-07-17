@@ -26,4 +26,6 @@ urlpatterns = [
     path('addsnippet/', views.add_snippet, name='add-snippet'),
     path('accounts/', include('allauth.urls')),
 
-] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+]
+
+urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

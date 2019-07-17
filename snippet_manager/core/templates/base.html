@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -7,10 +8,11 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
     <title>Code Snippet Manager</title>
+    <script src="{% static 'compiled.js' %}" defer></script>
+    <link rel="stylesheet" href="{% static 'main.css' %}"/>
 </head>
 <header>
     <input type="text" id="searchInput">
-    <button id="searchButton" class='buttons' type="submit">Search</button>
     {% load socialaccount %}
     {% if user.is_authenticated %}
     <p>Welcome {{ user.username }} !!!</p>
@@ -20,6 +22,9 @@
 </header>
 
 <body>
+    <ul id="searchResults">
+
+    </ul>
     {% block content %}
     {% endblock %}
 </body>
