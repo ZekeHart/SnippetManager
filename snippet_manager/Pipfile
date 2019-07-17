@@ -5,9 +5,12 @@ verify_ssl = true
 
 [dev-packages]
 pylint = "*"
+prospector = "*"
+yapf = "*"
 
 [packages]
 django = "*"
+django-allauth = "*"
 
 [requires]
 python_version = "3.7"
