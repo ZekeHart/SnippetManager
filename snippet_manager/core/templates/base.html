@@ -8,15 +8,14 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
     <title>Code Snippet Manager</title>
-<<<<<<< user-home
-    <link href="themes/prism.css" rel="stylesheet">
-=======
     <script src="{% static 'compiled.js' %}" defer></script>
     <link rel="stylesheet" href="{% static 'main.css' %}"/>
->>>>>>> master
 </head>
 <header>
-    <input type="text" id="searchInput">
+    <div id='searchBox'>
+        <input type="text" id="searchInput">
+        <button id="searchButton" class='buttons' type="submit">Search</button>
+    </div>
     {% load socialaccount %}
     {% if user.is_authenticated %}
     <p>Welcome {{ user.username }} !!! | <a href="{% url 'user-home' user.username %}">Your snippets</a></p>
@@ -26,14 +25,9 @@
 </header>
 
 <body>
-<<<<<<< user-home
-    <script src="prism.js"></script>
-    <pre class='language-py'><code class="language-py" contenteditable="true">hello = str('hello")</code></pre>
-=======
     <ul id="searchResults">
 
     </ul>
->>>>>>> master
     {% block content %}
     {% endblock %}
 </body>

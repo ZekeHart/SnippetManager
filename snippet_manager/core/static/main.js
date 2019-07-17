@@ -1,25 +1,23 @@
-/* globals fetch */
+let results
+let searchTerm
+let cleanSearch
 
-const $ = require('jquery')
+const searchButton = document.querySelector('#searchButton')
+const searchBox = document.querySelector('#searchBox')
 
-$(function() {
-
-    $('#searchInput').keyup(function() {
-
-        $.ajax({
-            type: "GET",
-            url: "index",
-            data: {
-                'search_text' : $('#searchInput').val(),
-                'csrfmiddlewaretoken' : $("input[name=csrfmiddlewaretoken]").val()
-            },
-            success: searchSuccess,
-            dataType: 'html'
-        })
+searchButton.addEventListener('click', function () {
+    searchBox.querySelector('input').focus()
+    searchTerm = searchBox.querySelector('input').value
+    cleanSearch = encodeURIComponent(searchTerm)
+    results = document.querySelector('#searchResults')
+    fetch(`http://localhost:8000/snippets/`)
+        .then(function (response) {
+            return response.json()
     })
+        .then(function (data) {
+            results.innerHTML = ''
+            for (let key of data.results) {
+                results.appendChild(displayResults(key))
+            }
+        })
 })
-
-function searchSuccess(data, textStatus, jqXHR)
-{
-    $('#searchResults').html(data)
-}
