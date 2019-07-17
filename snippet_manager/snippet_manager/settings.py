@@ -132,11 +132,6 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-<<<<<<< HEAD
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'core'),
-]
-=======
 AUTHENTICATION_BACKENDS = (
     "django.contrib.auth.backends.ModelBackend",
     "allauth.account.auth_backends.AuthenticationBackend",
@@ -145,4 +140,3 @@ AUTHENTICATION_BACKENDS = (
 SITE_ID = 1
 
 LOGIN_REDIRECT_URL = 'index'
->>>>>>> 71db7f41634ca267a2d5a4c0c1b04fc1208921d5
