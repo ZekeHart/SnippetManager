@@ -20,7 +20,7 @@ def index(request):
         return render(request, 'index.html', {'snippets':snippets})
 
 
-# @login_required
+@login_required
 def add_snippet(request):
     if request.method == 'POST':
         form = addSnippet(request.POST)
@@ -37,3 +37,15 @@ def add_snippet(request):
     }
 
     return render(request, 'add_snippet.html', context=context)
+
+
+@login_required
+def user_home(request):
+    user = request.user
+
+    snippets = Snippet.objects.filter(user=user)
+
+    context = {
+        'user': user,
+        'snippets': snippets,
+    }
