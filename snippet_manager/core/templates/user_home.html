@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>{{ user.get_username }}</h1>
+    {% if snippets %}
+        {% for snippet in snippets %}
+            <p>{{ snippet.title}} | {{ snippet.language.name }} | added on: {{ snippet.date }}</p>
+        {% endfor %}
+    {% endif %}
+{% endblock %}

@@ -1,5 +1,6 @@
 from datetime import date
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
 from django.urls import reverse
@@ -40,12 +41,18 @@ def add_snippet(request):
 
 
 @login_required
-def user_home(request):
-    user = request.user
+def user_home(request, username):
+    user = get_object_or_404(User, username=username)
+    
+    if (user == request.user):
+        snippets = Snippet.objects.filter(user=user)
 
-    snippets = Snippet.objects.filter(user=user)
+        context = {
+            'user': user,
+            'snippets': snippets,
+        }
 
-    context = {
-        'user': user,
-        'snippets': snippets,
-    }
+        return render(request, 'user_home.html', context)
+
+    else:
+        return HttpResponseRedirect(reverse('index.html'))
