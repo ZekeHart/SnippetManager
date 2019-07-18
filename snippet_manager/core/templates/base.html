@@ -13,6 +13,10 @@
     <link rel="stylesheet" href="{% static 'main.css' %}" />
 </head>
 <header>
+    <select id='searchTerm'>
+        <option value='snippets'>All users' snippets</option>
+        <option value='own'>My own snippets</option>
+    </select>
     <div id='searchBox'>
         <input type="text" id="searchInput">
         <button id="searchButton" class='buttons' type="submit">Search</button>

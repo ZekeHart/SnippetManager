@@ -94,4 +94,13 @@ class SnippetList(generics.ListCreateAPIView):
     queryset = Snippet.objects.all()
     serializer_class = SnippetSerializer
     filter_backends = [filters.SearchFilter]
-    search_fields = ['language__name', 'title']
+    search_fields = ['language__name', 'title', 'description', 'user__username']
+
+class OwnSnippets(generics.ListCreateAPIView):
+    serializer_class = SnippetSerializer
+    filter_backends = [filters.SearchFilter]
+    search_fields = ['language__name', 'title', 'description', 'user__username']
+    
+    def get_queryset(self, *args, **kwargs):
+        return Snippet.objects.all().filter(user__username=self.request.user)
+
