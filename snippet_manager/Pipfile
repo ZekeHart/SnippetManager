@@ -11,6 +11,8 @@ yapf = "*"
 [packages]
 django = "*"
 django-allauth = "*"
+django-cors-headers = "*"
+django-filter = "*"
 
 [requires]
 python_version = "3.7"

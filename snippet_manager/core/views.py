@@ -1,9 +1,16 @@
 from datetime import date
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render, get_object_or_404
 from django.urls import reverse
+from django.views.decorators.csrf import csrf_exempt
+from rest_framework.parsers import JSONParser
+from core.serializers import SnippetSerializer
+from rest_framework import status, generics, filters
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from django_filters.rest_framework import DjangoFilterBackend
 
 from core.forms import addSnippet
 from core.models import Snippet, Language
@@ -56,3 +63,9 @@ def user_home(request, username):
 
     else:
         return HttpResponseRedirect(reverse('index.html'))
+
+class SnippetList(generics.ListCreateAPIView):
+    queryset = Snippet.objects.all()
+    serializer_class = SnippetSerializer
+    filter_backends = [filters.SearchFilter]
+    search_fields = ['language__name', 'title']
