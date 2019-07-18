@@ -1,6 +1,8 @@
 {% extends 'base.html' %}
 
 {% block content %}
+{% load djangocodemirror_tags %}
+{% load static %}
 
     <p>Add a new code snippet</p>
     <form action="" method="post">
@@ -8,14 +10,26 @@
             <table>
             {{ form.as_p }}
             </table>
-            <!-- <pre id="editor"><input></pre>
-            
-            <script src="src-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
-            <script>
-                var editor = ace.edit("editor");
-                editor.setTheme("ace/theme/twilight");
-                editor.session.setMode("ace/mode/javascript");
-            </script> -->
+
             <input type="submit" value="Submit">
           </form>
+          {% codemirror_field_css_assets form.code %}
+        {% codemirror_field_js_assets form.code %}
+        <script src="{% static 'CodeMirror/mode/javascript/javascript.js' %}"></script>
+        <script src="{% static 'CodeMirror/mode/css/css.js' %}"></script>
+        <script src="{% static 'CodeMirror/mode/ruby/ruby.js' %}"></script>
+        <script src="{% static 'CodeMirror/mode/php/php.js' %}"></script>
+        <script src="{% static 'CodeMirror/mode/xml/xml.js' %}"></script>
+        <script>
+            var code_codemirror = CodeMirror.fromTextArea(
+                document.getElementById("id_code"),
+            {{ form.code|codemirror_parameters }});
+</script>
+<style>
+    .CodeMirror {
+        background-color: darkslategray;
+        color:whitesmoke;
+        margin: 0 20%;
+    }
+</style>
 {% endblock %}
