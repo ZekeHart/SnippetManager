@@ -1,0 +1,11 @@
+{% block content %}
+
+    <p>Add a new code snippet</p>
+    <form action="" method="post">
+            {% csrf_token %}
+            <table>
+            {{ form.as_p }}
+            </table>
+            <input type="submit" value="Submit">
+          </form>
+{% endblock %}
