@@ -7,7 +7,14 @@
 <a href="{% url 'add-snippet' %}">Add a code snippet</a>
 <div class="recentSnips">
     {% for snip in most_recent %}
-    <div>{{ snip.title }}</div>
+    <div class="snipsDiv">
+        <h3>{{ snip.title }}</h3>
+        <div class='code-toolbar'>
+            <pre class='line-numbers language-{{ snip.language }}'><code class="language-{{ snip.language }}"><strong>### {{ snip.language }} ###</strong>
+	
+		{{ snip.code }}</code></pre>
+        </div>
+    </div>
     {% endfor %}
 </div>
 {% endblock %}

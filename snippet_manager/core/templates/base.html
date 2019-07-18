@@ -20,8 +20,10 @@
     {% load socialaccount %}
     {% if user.is_authenticated %}
     <p>Welcome {{ user.username }} !!! | <a id="loggedIn" data-username="{{ user.username }}"
-            href="{% url 'user-home' user.username %}">Your snippets</a></p>
+            href="{% url 'user-home' user.username %}">Your snippets</a> | <a href="{% url 'account_logout' %}">Sign
+            Out</a></p>
     {% else %}
+    <a href="{% url 'account_login' %}">Sign In</a>
     <a href="{% provider_login_url 'github' %}">Sign In With GitHub</a>
     {% endif %}
 </header>
