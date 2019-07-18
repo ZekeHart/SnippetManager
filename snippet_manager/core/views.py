@@ -12,7 +12,7 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from django_filters.rest_framework import DjangoFilterBackend
 
-from core.forms import addSnippet
+from core.forms import addSnippet, editSnippet
 from core.models import Snippet, Language
 
 def index(request):
@@ -48,6 +48,29 @@ def add_snippet(request):
 
 
 @login_required
+def edit_snippet(request, pk):
+    snippet = get_object_or_404(Snippet, pk=pk)
+    if request.method == 'POST':
+        form = editSnippet(request.POST)
+        if form.is_valid():
+            snippet.title = form.cleaned_data['title']
+            snippet.description = form.cleaned_data['description']
+            snippet.language = form.cleaned_data['language']
+            snippet.code = form.cleaned_data['code']
+            snippet.save()
+            return HttpResponseRedirect(reverse('user-home', args=[request.user.username]))
+
+    else:
+        form = editSnippet(initial={'title': snippet.title, 'description': snippet.description, 'language': snippet.language, 'code': snippet.code})
+
+    context = {
+        'form': form,
+    }
+
+    return render(request, 'edit_snippet.html', context)
+
+
+@login_required
 def user_home(request, username):
     user = get_object_or_404(User, username=username)
     
@@ -63,6 +86,9 @@ def user_home(request, username):
 
     else:
         return HttpResponseRedirect(reverse('index.html'))
+
+
+
 
 class SnippetList(generics.ListCreateAPIView):
     queryset = Snippet.objects.all()
