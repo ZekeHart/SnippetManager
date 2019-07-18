@@ -5,4 +5,9 @@
 {% block content %}
 
 <a href="{% url 'add-snippet' %}">Add a code snippet</a>
+<div class="recentSnips">
+    {% for snip in most_recent %}
+    <div>{{ snip.title }}</div>
+    {% endfor %}
+</div>
 {% endblock %}
