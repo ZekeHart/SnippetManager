@@ -43,6 +43,15 @@ document.querySelector("#searchInput").addEventListener("keyup", event => {
     document.querySelector("#searchButton").click()
     event.preventDefault()
 });
+
+
+let editorLangSelect = document.querySelector("#id_language");
+if (editorLangSelect){
+    editorLangSelect.addEventListener("change", function (){
+        code_codemirror.setOption("mode", editorLangSelect.value.toLowerCase())
+    })
+}
+
 },{"./prism.js":2}],2:[function(require,module,exports){
 (function (global){
 /* PrismJS 1.16.0

@@ -42,3 +42,11 @@ document.querySelector("#searchInput").addEventListener("keyup", event => {
     document.querySelector("#searchButton").click()
     event.preventDefault()
 });
+
+
+let editorLangSelect = document.querySelector("#id_language");
+if (editorLangSelect){
+    editorLangSelect.addEventListener("change", function (){
+        code_codemirror.setOption("mode", editorLangSelect.value.toLowerCase())
+    })
+}
