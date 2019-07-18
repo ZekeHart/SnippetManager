@@ -46,6 +46,14 @@ document.querySelector("#searchInput").addEventListener("keyup", event => {
 
 
 
+let editorLangSelect = document.querySelector("#id_language");
+if (editorLangSelect){
+    editorLangSelect.addEventListener("change", function (){
+        code_codemirror.setOption("mode", editorLangSelect.value.toLowerCase())
+    })
+}
+
+
 
 let copyTitle
 let copyLanguage
@@ -90,3 +98,4 @@ document.querySelector('#searchResults').addEventListener('click', function (eve
 
     }
 })
+
