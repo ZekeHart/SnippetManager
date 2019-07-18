@@ -1,12 +1,15 @@
 from datetime import date
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
-from django.http import HttpResponseRedirect, HttpResponse, JsonResponse
+from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render, get_object_or_404
 from django.urls import reverse
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.parsers import JSONParser
 from core.serializers import SnippetSerializer
+from rest_framework import status
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
 
 from core.forms import addSnippet
 from core.models import Snippet, Language
@@ -60,7 +63,7 @@ def user_home(request, username):
     else:
         return HttpResponseRedirect(reverse('index.html'))
 
-@csrf_exempt
+@api_view(['GET'])
 def snippet_list(request):
     """
     List snippets
@@ -68,4 +71,4 @@ def snippet_list(request):
     if request.method == 'GET':
         snippets = Snippet.objects.all()
         serializer = SnippetSerializer(snippets, many=True)
-        return JsonResponse(serializer.data, safe=False)
+        return Response(serializer.data)

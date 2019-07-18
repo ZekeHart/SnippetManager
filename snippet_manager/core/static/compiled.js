@@ -8,11 +8,15 @@ const searchBox = document.querySelector('#searchBox')
 
 function displayResults (key) {
     const resultsDiv = document.createElement('div')
-    resultsDiv.classList.add('individualResult')
+    resultsDiv.classList.add('snippet')
     resultsDiv.innerHTML = `
 	<p><strong>${key.title}</strong> | added on: ${key.date}</p>
-    <pre class='line-numbers'><code class="language-${key.language.code }"><strong>### ${key.language.name } ###</strong>
-    `
+	<div class='code-toolbar'>	
+		<pre class='line-numbers'><code class="language-${key.code}"><strong>### ${key.language} ###</strong>
+	
+		${key.code}</code></pre>
+	</div>
+	`
     return resultsDiv
 }
 
