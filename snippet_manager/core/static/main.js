@@ -2,10 +2,11 @@ let results
 let searchTerm
 let cleanSearch
 
+
 const searchButton = document.querySelector('#searchButton')
 const searchBox = document.querySelector('#searchBox')
 
-function displayResults (key) {
+function displayResults(key) {
     const resultsDiv = document.createElement('div')
     resultsDiv.classList.add('snippet')
     resultsDiv.innerHTML = `
@@ -27,7 +28,7 @@ searchButton.addEventListener('click', function () {
     fetch(`http://localhost:8000/snippets/?search=${cleanSearch}`)
         .then(function (response) {
             return response.json()
-    })
+        })
         .then(function (data) {
             results.innerHTML = ''
             for (let key of data) {
@@ -36,7 +37,7 @@ searchButton.addEventListener('click', function () {
         })
 })
 document.querySelector("#searchInput").addEventListener("keyup", event => {
-    if(event.key !== "Enter") return;
+    if (event.key !== "Enter") return;
     document.querySelector("#searchButton").click()
     event.preventDefault()
 });

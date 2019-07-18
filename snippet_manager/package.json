@@ -8,7 +8,7 @@
         "watchify": "^3.11.1"
     },
     "scripts": {
-        "start": "watchify -o <compiled.js> <main.js>",
-        "compile": "browserify -o <compiled.js> <main.js>"
+        "start": "watchify -o core/static/compiled.js core/static/main.js",
+        "compile": "browserify -o core/static/compiled.js core/static/main.js"
     }
 }
