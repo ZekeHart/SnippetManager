@@ -13,6 +13,7 @@ django = "*"
 django-allauth = "*"
 django-cors-headers = "*"
 django-filter = "*"
+djangorestframework = "*"
 
 [requires]
 python_version = "3.7"
