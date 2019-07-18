@@ -6,7 +6,7 @@
     {% if snippets %}
         {% for snippet in snippets %}
         <div class="snippet">
-            <p><strong>{{ snippet.title}}</strong> | added on: {{ snippet.date }}</p>
+            <p><strong>{{ snippet.title}}</strong> | added on: {{ snippet.date }} | <a href="{% url 'edit-snippet' snippet.pk %}">EDIT</a></p>
             <pre class='line-numbers'><code class="language-{{ snippet.language.code }}"><strong>### {{ snippet.language.name }} ###</strong>
 
 {{ snippet.code }}</code></pre>
