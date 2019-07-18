@@ -2,7 +2,7 @@ let results
 let searchTerm
 let cleanSearch
 
-
+const Prism = require('./prism.js')
 const searchButton = document.querySelector('#searchButton')
 const searchBox = document.querySelector('#searchBox')
 
@@ -34,6 +34,7 @@ searchButton.addEventListener('click', function () {
             for (let key of data) {
                 results.appendChild(displayResults(key))
             }
+            Prism.highlightAll()
         })
 })
 document.querySelector("#searchInput").addEventListener("keyup", event => {
