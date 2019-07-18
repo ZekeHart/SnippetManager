@@ -3,6 +3,7 @@ let results
 let searchTerm
 let cleanSearch
 
+const searchAttr = document.querySelector('#searchTerm')
 const Prism = require('./prism.js')
 const searchButton = document.querySelector('#searchButton')
 const searchBox = document.querySelector('#searchBox')
@@ -26,7 +27,7 @@ searchButton.addEventListener('click', function () {
     searchTerm = searchBox.querySelector('input').value
     cleanSearch = encodeURIComponent(searchTerm)
     results = document.querySelector('#searchResults')
-    fetch(`http://localhost:8000/snippets/?search=${cleanSearch}`)
+    fetch(`http://localhost:8000/${searchAttr.value}/?search=${cleanSearch}`)
         .then(function (response) {
             return response.json()
         })

@@ -6,4 +6,4 @@ class SnippetSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Snippet
-        fields = ['language', 'title', 'date', 'code',]
+        fields = ['language', 'title', 'date', 'code', 'description', 'user', 'original', 'pk']
