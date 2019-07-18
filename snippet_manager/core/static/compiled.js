@@ -25,7 +25,7 @@ searchButton.addEventListener('click', function () {
     searchTerm = searchBox.querySelector('input').value
     cleanSearch = encodeURIComponent(searchTerm)
     results = document.querySelector('#searchResults')
-    fetch(`http://localhost:8000/snippets/`)
+    fetch(`http://localhost:8000/snippets/?search=${cleanSearch}`)
         .then(function (response) {
             return response.json()
     })

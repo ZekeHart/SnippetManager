@@ -7,9 +7,10 @@ from django.urls import reverse
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.parsers import JSONParser
 from core.serializers import SnippetSerializer
-from rest_framework import status
+from rest_framework import status, generics, filters
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
+from django_filters.rest_framework import DjangoFilterBackend
 
 from core.forms import addSnippet
 from core.models import Snippet, Language
@@ -63,12 +64,8 @@ def user_home(request, username):
     else:
         return HttpResponseRedirect(reverse('index.html'))
 
-@api_view(['GET'])
-def snippet_list(request):
-    """
-    List snippets
-    """
-    if request.method == 'GET':
-        snippets = Snippet.objects.all()
-        serializer = SnippetSerializer(snippets, many=True)
-        return Response(serializer.data)
+class SnippetList(generics.ListCreateAPIView):
+    queryset = Snippet.objects.all()
+    serializer_class = SnippetSerializer
+    filter_backends = [filters.SearchFilter]
+    search_fields = ['language__name', 'title']

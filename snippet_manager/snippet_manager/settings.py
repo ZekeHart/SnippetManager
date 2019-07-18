@@ -32,6 +32,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'corsheaders',
+    'django_filters',
     'rest_framework',
     'django.contrib.admin',
     'core.apps.CoreConfig',
@@ -145,3 +146,7 @@ SITE_ID = 1
 LOGIN_REDIRECT_URL = 'index'
 
 CORS_ORIGIN_ALLOW_ALL = True
+
+REST_FRAMEWORK = {
+    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend']
+}
