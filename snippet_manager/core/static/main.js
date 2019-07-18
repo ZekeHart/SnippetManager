@@ -11,7 +11,7 @@ function displayResults (key) {
     resultsDiv.innerHTML = `
     <p><strong>${key.title}</strong> | added on: ${key.date}</p>
     <div class='code-toolbar'>	
-		<pre class='line-numbers'><code class="language-${key.code}"><strong>### ${key.language} ###</strong>
+		<pre class='line-numbers language-${key.language}'><code class="language-${key.language}"><strong>### ${key.language} ###</strong>
 	
 		${key.code}</code></pre>
 	</div>
