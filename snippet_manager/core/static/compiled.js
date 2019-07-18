@@ -10,13 +10,13 @@ function displayResults (key) {
     const resultsDiv = document.createElement('div')
     resultsDiv.classList.add('snippet')
     resultsDiv.innerHTML = `
-	<p><strong>${key.title}</strong> | added on: ${key.date}</p>
-	<div class='code-toolbar'>	
+    <p><strong>${key.title}</strong> | added on: ${key.date}</p>
+    <div class='code-toolbar'>	
 		<pre class='line-numbers'><code class="language-${key.code}"><strong>### ${key.language} ###</strong>
 	
 		${key.code}</code></pre>
 	</div>
-	`
+    `
     return resultsDiv
 }
 
@@ -36,4 +36,9 @@ searchButton.addEventListener('click', function () {
             }
         })
 })
+document.querySelector("#searchInput").addEventListener("keyup", event => {
+    if(event.key !== "Enter") return;
+    document.querySelector("#searchButton").click()
+    event.preventDefault()
+});
 },{}]},{},[1]);
