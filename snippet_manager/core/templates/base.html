@@ -9,8 +9,8 @@
 
     <title>Code Snippet Manager</title>
     <script src="{% static 'compiled.js' %}" defer></script>
-    <link rel="stylesheet" href="{% static 'prism.css' %}"/>
-    <link rel="stylesheet" href="{% static 'main.css' %}"/>
+    <link rel="stylesheet" href="{% static 'prism.css' %}" />
+    <link rel="stylesheet" href="{% static 'main.css' %}" />
 </head>
 <header>
     <div id='searchBox'>
@@ -19,7 +19,8 @@
     </div>
     {% load socialaccount %}
     {% if user.is_authenticated %}
-    <p>Welcome {{ user.username }} !!! | <a href="{% url 'user-home' user.username %}">Your snippets</a></p>
+    <p>Welcome {{ user.username }} !!! | <a id="loggedIn" data-username="{{ user.username }}"
+            href="{% url 'user-home' user.username %}">Your snippets</a></p>
     {% else %}
     <a href="{% provider_login_url 'github' %}">Sign In With GitHub</a>
     {% endif %}
