@@ -5,6 +5,12 @@ let cleanSearch
 var ifOwn = ''
 var dropDownChoice
 
+const snip0Button = document.querySelector('#snip0Button')
+const snip1Button = document.querySelector('#snip1Button')
+const snip2Button = document.querySelector('#snip2Button')
+const snip0 = document.querySelector('#snip0')
+const snip1 = document.querySelector('#snip1')
+const snip2 = document.querySelector('#snip2')
 const searchAttr = document.querySelector('#searchTerm')
 dropDownChoice = searchAttr.value
 const Prism = require('./prism.js')
@@ -129,6 +135,15 @@ function getDate() {
     today = yyyy + '-' + mm + '-' + dd;
 }
 
+snip0Button.addEventListener('click', function () {
+    snip0.classList.toggle('hideSnip')
+})
+snip1Button.addEventListener('click', function () {
+    snip1.classList.toggle('hideSnip')
+})
+snip2Button.addEventListener('click', function () {
+    snip2.classList.toggle('hideSnip')
+})
 },{"./prism.js":2}],2:[function(require,module,exports){
 (function (global){
 /* PrismJS 1.16.0

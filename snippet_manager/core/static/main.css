@@ -23,3 +23,8 @@ body {
     max-width: 30%;
     text-align: center;
 }
+
+.hideSnip {
+    display: none;
+    background: red;
+}

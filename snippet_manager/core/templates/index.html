@@ -6,15 +6,31 @@
 
 <a href="{% url 'add-snippet' %}">Add a code snippet</a>
 <div class="recentSnips">
-    {% for snip in most_recent %}
-    <div class="snipsDiv">
-        <h3>{{ snip.title }}</h3>
+    <button id="snip0Button">{{ snip0.title }}</button>
+    <button id="snip1Button">{{ snip1.title }}</button>
+    <button id="snip2Button">{{ snip2.title }}</button>
+</div>
+<div class="">
+    <div id="snip0" class="hideSnip">
         <div class='code-toolbar'>
-            <pre class='line-numbers language-{{ snip.language }}'><code class="language-{{ snip.language }}"><strong>### {{ snip.language }} ###</strong>
-	
-		{{ snip.code }}</code></pre>
+            <pre class='line-numbers language-{{ snip0.language }}'><code class="language-{{ snip0.language }}"><strong>### {{ snip.language }} ###</strong>
+        {{ snip0.code }}</code></pre>
         </div>
     </div>
-    {% endfor %}
+    <div id="snip1" class="hideSnip">
+        <div class='code-toolbar'>
+            <pre class='line-numbers language-{{ snip1.language }}'><code class="language-{{ snip1.language }}"><strong>### {{ snip.language }} ###</strong>
+        {{ snip1.code }}</code></pre>
+        </div>
+    </div>
+    <div id="snip2" class="hideSnip">
+        <div class='code-toolbar'>
+            <pre class='line-numbers language-{{ snip2.language }}'><code class="language-{{ snip2.language }}"><strong>### {{ snip.language }} ###</strong>
+        {{ snip2.code }}</code></pre>
+        </div>
+    </div>
 </div>
+
+
+
 {% endblock %}

@@ -16,17 +16,25 @@ from django_filters.rest_framework import DjangoFilterBackend
 from core.forms import addSnippet, editSnippet
 from core.models import Snippet, Language
 
+
 def index(request):
     most_recent = Snippet.objects.order_by('date')[:3]
     if request.method == "GET":
         search_text = request.GET.get('search_text', '')
         if search_text is not None and search_text != u"":
             search_text = request.GET.get('search_text', '')
-            snippets = Snippet.objects.filter(title__contains = search_text)
+            snippets = Snippet.objects.filter(title__contains=search_text)
         else:
             snippets = []
 
-    return render(request, 'index.html', {'snippets':snippets, 'most_recent':most_recent})
+    return render(
+        request, 'index.html', {
+            'snippets': snippets,
+            'most_recent': most_recent,
+            'snip0': most_recent[0],
+            'snip1': most_recent[1],
+            'snip2': most_recent[2],
+        })
 
 
 @login_required
@@ -34,7 +42,12 @@ def add_snippet(request):
     if request.method == 'POST':
         form = addSnippet(request.POST)
         if form.is_valid():
-            snippet = Snippet.objects.create(title=form.cleaned_data['title'], description=form.cleaned_data['description'], language=form.cleaned_data['language'], code=form.cleaned_data['code'], user=request.user)
+            snippet = Snippet.objects.create(
+                title=form.cleaned_data['title'],
+                description=form.cleaned_data['description'],
+                language=form.cleaned_data['language'],
+                code=form.cleaned_data['code'],
+                user=request.user)
             snippet.save()
             return HttpResponseRedirect(reverse('index'))
     else:
@@ -59,10 +72,17 @@ def edit_snippet(request, pk):
             snippet.language = form.cleaned_data['language']
             snippet.code = form.cleaned_data['code']
             snippet.save()
-            return HttpResponseRedirect(reverse('user-home', args=[request.user.username]))
+            return HttpResponseRedirect(
+                reverse('user-home', args=[request.user.username]))
 
     else:
-        form = editSnippet(initial={'title': snippet.title, 'description': snippet.description, 'language': snippet.language, 'code': snippet.code})
+        form = editSnippet(
+            initial={
+                'title': snippet.title,
+                'description': snippet.description,
+                'language': snippet.language,
+                'code': snippet.code
+            })
 
     context = {
         'form': form,
@@ -74,7 +94,7 @@ def edit_snippet(request, pk):
 @login_required
 def user_home(request, username):
     user = get_object_or_404(User, username=username)
-    
+
     if (user == request.user):
         snippets = Snippet.objects.filter(user=user)
 
@@ -89,20 +109,24 @@ def user_home(request, username):
         return HttpResponseRedirect(reverse('index.html'))
 
 
-
-
 class SnippetList(generics.ListCreateAPIView):
     queryset = Snippet.objects.all()
     serializer_class = SnippetSerializer
     filter_backends = [filters.SearchFilter]
-    search_fields = ['language__name', 'title', 'description', 'user__username']
+    search_fields = [
+        'language__name', 'title', 'description', 'user__username'
+    ]
+
 
 class OwnSnippets(generics.ListCreateAPIView):
     queryset = Snippet.objects.all()
     serializer_class = SnippetSerializer
     filter_backends = [filters.SearchFilter]
-    search_fields = ['language__name', 'title', 'code', 'description', 'user__username']
+    search_fields = [
+        'language__name', 'title', 'code', 'description', 'user__username'
+    ]
+
 
 class DeleteSnippets(generics.DestroyAPIView):
     queryset = Snippet.objects.all()
-    serializer_class = SnippetSerializer   
+    serializer_class = SnippetSerializer
