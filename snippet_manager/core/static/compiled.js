@@ -49,8 +49,8 @@ document.querySelector("#searchInput").addEventListener("keyup", event => {
 
 
 let editorLangSelect = document.querySelector("#id_language");
-if (editorLangSelect){
-    editorLangSelect.addEventListener("change", function (){
+if (editorLangSelect) {
+    editorLangSelect.addEventListener("change", function () {
         code_codemirror.setOption("mode", editorLangSelect.value.toLowerCase())
     })
 }
@@ -76,7 +76,7 @@ document.querySelector('#searchResults').addEventListener('click', function (eve
         copyCode = event.target.dataset['code']
         copyOriginal = event.target.dataset['pk']
         copyDescription = event.target.dataset['description']
-        copyDate = new Date()
+        let copyDate = getDate()
 
         copyDict = {
             "language": copyLanguage,
@@ -87,20 +87,30 @@ document.querySelector('#searchResults').addEventListener('click', function (eve
             "description": copyDescription,
             "date": copyDate
         }
-        console.log(copyDict)
-        // fetch(url, {
-        //     method: 'POST',
-        //     body: JSON.stringify(copyDict),
-        //     headers: {
-        //         'Content-Type': 'application/json'
-        //     }
-        // }).then(res => res.json())
-        //     .then(response => console.log('Success:', JSON.stringify(response)))
-        //     .catch(error => console.error('Error:', error));
+        // console.log(copyDict)
+        console.log(JSON.stringify(copyDict))
+        fetch('http://localhost:8000/snippets/', {
+            method: 'POST',
+            body: JSON.stringify(copyDict),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then(res => res.json())
+            .then(response => console.log('Success:', JSON.stringify(response)))
+            .catch(error => console.error('Error:', error));
 
     }
 })
 
+
+function getDate() {
+    let today = new Date();
+    let dd = String(today.getDate()).padStart(2, '0');
+    let mm = String(today.getMonth() + 1).padStart(2, '0');
+    let yyyy = today.getFullYear();
+
+    today = yyyy + '-' + mm + '-' + dd;
+}
 
 },{"./prism.js":2}],2:[function(require,module,exports){
 (function (global){
