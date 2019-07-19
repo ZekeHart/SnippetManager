@@ -33,7 +33,7 @@
             <a class="nav-link align-middle text-secondary font-weight-light">Welcome, {{ user.username }}!</a>
             <a class="nav-link align-middle" href="{% url 'add-snippet' %}">Add snippet</a>
             <a class='nav-link align-middle' id="loggedIn" data-username="{{ user.pk }}"
-                data-userstring="{{ user.username }} href=" {% url 'user-home' user.username %}">Your snippets</a>
+                data-userstring="{{ user.username }}" href=" {% url 'user-home' user.username %}">Your snippets</a>
             <a class="nav-link align-middle" href="{% url 'account_logout' %}">Sign Out</a>
             <a class="nav-link align-middle font-weight-bold" href="{% url 'index' %}">Home</a>
             {% else %}
