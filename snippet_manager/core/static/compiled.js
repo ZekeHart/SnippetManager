@@ -5,6 +5,12 @@ let cleanSearch
 var ifOwn = ''
 var dropDownChoice
 
+const snip0Button = document.querySelector('#snip0Button')
+const snip1Button = document.querySelector('#snip1Button')
+const snip2Button = document.querySelector('#snip2Button')
+const snip0 = document.querySelector('#snip0')
+const snip1 = document.querySelector('#snip1')
+const snip2 = document.querySelector('#snip2')
 const searchAttr = document.querySelector('#searchTerm')
 dropDownChoice = searchAttr.value
 const Prism = require('./prism.js')
@@ -15,17 +21,16 @@ const resultArea = document.querySelector('#searchResults')
 
 function escapeHtml(unsafe) {
     return unsafe
-         .replace(/&/g, "&amp;")
-         .replace(/</g, "&lt;")
-         .replace(/>/g, "&gt;")
-         .replace(/"/g, "&quot;")
-         .replace(/'/g, "&#039;");
- }
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+}
 if (document.querySelector('#loggedIn')) {
     var copyUser = document.querySelector('#loggedIn').dataset['username']
     var copyUsername = document.querySelector('#loggedIn').dataset['userstring']
 }
-
 
 function displayResults(key) {
     const resultsDiv = document.createElement('div')
@@ -39,7 +44,6 @@ ${escapeHtml(key.code)}</code></pre>
     </div>`
     if (document.querySelector('#loggedIn')) {
         resultsDiv.innerHTML += `<div id="copySuccess${key.pk}"></div>
-
     <button class="copyButton" data-pk="${key.pk}" data-title="${key.title}" data-language="${key.language}" data-description="${key.description}" data-code="${key.code}">Copy</button>
     `
     }
@@ -69,7 +73,6 @@ searchButton.addEventListener('click', function () {
             }
             Prism.highlightAllUnder(results)
             ifOwn = ''
-
         })
 })
 document.querySelector("#searchInput").addEventListener("keyup", event => {
@@ -78,8 +81,8 @@ document.querySelector("#searchInput").addEventListener("keyup", event => {
     event.preventDefault()
 });
 
-searchInput.addEventListener('input', function (){
-    if (!searchInput.value){
+searchInput.addEventListener('input', function () {
+    if (!searchInput.value) {
         resultArea.innerHTML = ''
         return;
     }
@@ -89,8 +92,8 @@ searchInput.addEventListener('input', function (){
 
 
 let editorLangSelect = document.querySelector("#id_language");
-if (editorLangSelect){
-    editorLangSelect.addEventListener("change", function (){
+if (editorLangSelect) {
+    editorLangSelect.addEventListener("change", function () {
         code_codemirror.setOption("mode", editorLangSelect.value.toLowerCase())
     })
 }
@@ -122,9 +125,8 @@ document.querySelector('#searchResults').addEventListener('click', function (eve
             "user": copyUser,
             "original": copyOriginal,
             "description": copyDescription,
-            "date": copyDate
+            "date": getDate()
         }
-
         // console.log(copyDict)
         console.log(JSON.stringify(copyDict))
         fetch('http://localhost:8000/snippets/', {
@@ -139,10 +141,27 @@ document.querySelector('#searchResults').addEventListener('click', function (eve
         let copySuccess = '#copySuccess' + copyOriginal
         document.querySelector(copySuccess).innerHTML = '<p>You made a copy to your profile!</p>'
 
-
     }
 })
 
+function getDate() {
+    let today = new Date();
+    let dd = String(today.getDate()).padStart(2, '0');
+    let mm = String(today.getMonth() + 1).padStart(2, '0');
+    let yyyy = today.getFullYear();
+
+    today = yyyy + '-' + mm + '-' + dd;
+}
+
+snip0Button.addEventListener('click', function () {
+    snip0.classList.toggle('hideSnip')
+})
+snip1Button.addEventListener('click', function () {
+    snip1.classList.toggle('hideSnip')
+})
+snip2Button.addEventListener('click', function () {
+    snip2.classList.toggle('hideSnip')
+})
 
 },{"./prism.js":2}],2:[function(require,module,exports){
 (function (global){
