@@ -26,7 +26,7 @@ function displayResults(key) {
 		${key.code}</code></pre>
     </div>`
     if (document.querySelector('#loggedIn')) {
-        resultsDiv.innerHTML += `
+        resultsDiv.innerHTML += `<div id="copySuccess${key.pk}"></div>
     <button class="copyButton" data-pk="${key.pk}" data-title="${key.title}" data-language="${key.language}" data-description="${key.description}" data-code="${key.code}">Copy</button>
     `
     }
@@ -113,6 +113,8 @@ document.querySelector('#searchResults').addEventListener('click', function (eve
         }).then(res => res.json())
             .then(response => console.log('Success:', JSON.stringify(response)))
             .catch(error => console.error('Error:', error));
+        let copySuccess = '#copySuccess' + copyOriginal
+        document.querySelector(copySuccess).innerHTML = '<p>You made a copy to your profile!</p>'
 
     }
 })
