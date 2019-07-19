@@ -10,6 +10,7 @@ from core.serializers import SnippetSerializer
 from rest_framework import status, generics, filters
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
+from rest_framework.views import APIView
 from django_filters.rest_framework import DjangoFilterBackend
 
 from core.forms import addSnippet, editSnippet
@@ -96,11 +97,24 @@ class SnippetList(generics.ListCreateAPIView):
     filter_backends = [filters.SearchFilter]
     search_fields = ['language__name', 'title', 'description', 'user__username']
 
-class OwnSnippets(generics.ListCreateAPIView):
-    serializer_class = SnippetSerializer
-    filter_backends = [filters.SearchFilter]
-    search_fields = ['language__name', 'title', 'description', 'user__username']
+# class OwnSnippets(generics.ListCreateAPIView):
+#     serializer_class = SnippetSerializer
+#     filter_backends = [filters.SearchFilter]
+#     search_fields = ['language__name', 'title', 'description', 'user__username']
     
-    def get_queryset(self, *args, **kwargs):
-        return Snippet.objects.all().filter(user__username=self.request.user)
+    # def get_queryset(self):
+        
+    #     user = self.request.user
+    #     return Snippet.objects.filter(user__username=user)
 
+class OwnSnippets(APIView):
+        
+    def get(self, request, format=None):
+        snippets = Snippet.objects.all()
+        serializer = SnippetSerializer(snippets, many=True)
+        return Response(serializer.data)
+    
+    def get_queryset(self):
+        
+        user = self.request.user
+        return Snippet.objects.filter(user__username=user)
