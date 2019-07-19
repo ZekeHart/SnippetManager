@@ -154,10 +154,28 @@ function getDate() {
 
 snip0Button.addEventListener('click', function () {
     snip0.classList.toggle('hideSnip')
+    if (!snip2.classList.contains('hideSnip')) {
+        snip2.classList.add('hideSnip')
+    }
+    if (!snip1.classList.contains('hideSnip')) {
+        snip1.classList.add('hideSnip')
+    }
 })
 snip1Button.addEventListener('click', function () {
     snip1.classList.toggle('hideSnip')
+    if (!snip0.classList.contains('hideSnip')) {
+        snip0.classList.add('hideSnip')
+    }
+    if (!snip2.classList.contains('hideSnip')) {
+        snip2.classList.add('hideSnip')
+    }
 })
 snip2Button.addEventListener('click', function () {
     snip2.classList.toggle('hideSnip')
+    if (!snip0.classList.contains('hideSnip')) {
+        snip0.classList.add('hideSnip')
+    }
+    if (!snip1.classList.contains('hideSnip')) {
+        snip1.classList.add('hideSnip')
+    }
 })

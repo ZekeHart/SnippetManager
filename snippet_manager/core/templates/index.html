@@ -4,32 +4,68 @@
 
 {% block content %}
 
-
+<h1 class="h2">Recent snippets</h1>
+<br>
 <div class="recentSnips">
-    <button id="snip0Button">{{ snip0.title }}</button>
-    <button id="snip1Button">{{ snip1.title }}</button>
-    <button id="snip2Button">{{ snip2.title }}</button>
+    <div class="snippet card bg-transparent" id="snip0Button">
+      <p class="card-header font-weight-bold">{{ snip0.title }}</p>
+      <div class="card-body">
+        <p class="card-text">{{ snip0.language.name }}</p>
+        <p class="card-text">{{ snip0.date }}</p>
+      </div>
+    </div>
+    <div class="snippet card bg-transparent" id="snip1Button">
+      <p class="card-header font-weight-bold">{{ snip1.title }}</p>
+      <div class="card-body">
+        <p class="card-text">{{ snip1.language.name }}</p>
+        <p class="card-text">{{ snip1.date }}</p>
+      </div>
+    </div>
+    <div class="snippet card bg-transparent" id="snip2Button">
+      <p class="card-header font-weight-bold">{{ snip2.title }}</p>
+      <div class="card-body">
+        <p class="card-text">{{ snip2.language.name }}</p>
+        <p class="card-text">{{ snip2.date }}</p>
+      </div>
+    </div>
 </div>
 <div class="">
     <div id="snip0" class="hideSnip">
-        <div class='code-toolbar'>
-            <pre class='line-numbers language-{{ snip0.language }}'><code class="language-{{ snip0.language }}"><strong>### {{ snip0.language }} ###</strong>
-        {{ snip0.code }}</code></pre>
+    <div class="snippet card bg-transparent">
+            <p class="card-header snippet-title"><span class="font-weight-bold">{{ snip0.title }} </span></p>
+            <div class="card-body">
+            <p class="card-text">{{ snip0.user.username }} | Added on: {{ snip0.date }}</p>
+            <p class="card-text text-secondary">{{ snip0.description }} </p>
+            <pre class='line-numbers'><code class="language-{{ snip0.language.code }}"><strong>### {{ snip0.language.name }} ###</strong>
+
+{{ snip0.code }}</code></pre>
+            </div>
         </div>
     </div>
     <div id="snip1" class="hideSnip">
-        <div class='code-toolbar'>
-            <pre class='line-numbers language-{{ snip1.language }}'><code class="language-{{ snip1.language }}"><strong>### {{ snip1.language }} ###</strong>
-        {{ snip1.code }}</code></pre>
+    <div class="snippet card bg-transparent">
+            <p class="card-header snippet-title"><span class="font-weight-bold">{{ snip1.title }} </span></p>
+            <div class="card-body">
+            <p class="card-text">{{ snip1.user.username }} | Added on: {{ snip1.date }}</p>
+            <p class="card-text text-secondary">{{ snip1.description }} </p>
+            <pre class='line-numbers'><code class="language-{{ snip1.language.code }}"><strong>### {{ snip1.language.name }} ###</strong>
+
+{{ snip1.code }}</code></pre>
+            </div>
         </div>
     </div>
     <div id="snip2" class="hideSnip">
-        <div class='code-toolbar'>
+    <div class="snippet card bg-transparent">
+            <p class="card-header snippet-title"><span class="font-weight-bold">{{ snip2.title }} </span></p>
+            <div class="card-body">
+            <p class="card-text">{{ snip2.user.username }} | Added on: {{ snip2.date }}</p>
+            <p class="card-text text-secondary">{{ snip2.description }} </p>
+            <pre class='line-numbers'><code class="language-{{ snip2.language.code }}"><strong>### {{ snip2.language.name }} ###</strong>
 
-            <pre class='line-numbers language-{{ snip2.language }}'><code class="language-{{ snip2.language }}"><strong>### {{ snip2.language }} ###</strong>
-        {{ snip2.code }}</code></pre>
-
+{{ snip2.code }}</code></pre>
+            </div>
         </div>
     </div>
+
 </div>
 {% endblock %}
