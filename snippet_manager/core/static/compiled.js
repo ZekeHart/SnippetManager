@@ -7,6 +7,9 @@ const searchAttr = document.querySelector('#searchTerm')
 const Prism = require('./prism.js')
 const searchButton = document.querySelector('#searchButton')
 const searchBox = document.querySelector('#searchBox')
+if (document.querySelector('#loggedIn')) {
+    let copyUser = document.querySelector('#loggedIn').dataset['username']
+}
 
 function displayResults(key) {
     const resultsDiv = document.createElement('div')
@@ -17,9 +20,12 @@ function displayResults(key) {
 		<pre class='line-numbers language-${key.language}'><code class="language-${key.language}"><strong>### ${key.language} ###</strong>
 	
 		${key.code}</code></pre>
-    </div>
+    </div>`
+    if (document.querySelector('#loggedIn')) {
+        resultsDiv.innerHTML += `
     <button class="copyButton" data-pk="${key.pk}" data-title="${key.title}" data-language="${key.language}" data-description="${key.description}" data-code="${key.code}">Copy</button>
     `
+    }
     return resultsDiv
 }
 
@@ -63,9 +69,6 @@ let copyCode
 let copyOriginal
 let copyDescription
 let copyDict
-
-let copyUser = document.querySelector('#loggedIn').dataset['username']
-console.log(copyUser)
 
 const copyButton = document.querySelector('#copyButton')
 
