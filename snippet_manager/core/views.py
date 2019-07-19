@@ -103,3 +103,6 @@ class OwnSnippets(generics.ListCreateAPIView):
     filter_backends = [filters.SearchFilter]
     search_fields = ['language__name', 'title', 'code', 'description', 'user__username']
 
+class DeleteSnippets(generics.DestroyAPIView):
+    queryset = Snippet.objects.all()
+    serializer_class = SnippetSerializer   

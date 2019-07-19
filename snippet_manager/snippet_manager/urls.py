@@ -33,6 +33,7 @@ urlpatterns = [
     path('user/<username>/', views.user_home, name='user-home'),
     path('snippets/', views.SnippetList.as_view()),
     path('own/', views.OwnSnippets.as_view()),
+    path('delete/', views.DeleteSnippets.as_view()),
     path('edit/<pk>', views.edit_snippet, name='edit-snippet'),
 ]
 
