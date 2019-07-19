@@ -18,7 +18,7 @@ class Snippet (models.Model):
     description = models.CharField(max_length=500, help_text="Brief description of the function of the snippet")
     language = models.ForeignKey("Language", on_delete=models.SET_NULL, null=True)
     date = models.DateField(default=date.today)
-    code = models.TextField()
+    code = models.TextField(blank=True, null=True)
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
 
     original = models.ForeignKey('self', on_delete=models.SET_NULL, null=True, blank=True)

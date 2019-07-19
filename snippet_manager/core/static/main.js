@@ -15,6 +15,17 @@ dropDownChoice = searchAttr.value
 const Prism = require('./prism.js')
 const searchButton = document.querySelector('#searchButton')
 const searchBox = document.querySelector('#searchBox')
+const searchInput = document.querySelector('#searchInput')
+const resultArea = document.querySelector('#searchResults')
+
+function escapeHtml(unsafe) {
+    return unsafe
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+}
 if (document.querySelector('#loggedIn')) {
     var copyUser = document.querySelector('#loggedIn').dataset['username']
     var copyUsername = document.querySelector('#loggedIn').dataset['userstring']
@@ -26,9 +37,9 @@ function displayResults(key) {
     resultsDiv.innerHTML = `
     <p><strong>${key.title}</strong> | added on: ${key.date}</p>
     <div class='code-toolbar'>	
-		<pre class='line-numbers language-${key.language}'><code class="language-${key.language}"><strong>### ${key.language} ###</strong>
-	
-		${key.code}</code></pre>
+        <pre class='line-numbers language-${key.language.toLowerCase()}'><code class='language-${key.language.toLowerCase()}'><strong>### ${key.language} ###</strong>
+
+${escapeHtml(key.code)}</code></pre>
     </div>`
     if (document.querySelector('#loggedIn')) {
         resultsDiv.innerHTML += `<div id="copySuccess${key.pk}"></div>
@@ -59,7 +70,7 @@ searchButton.addEventListener('click', function () {
             for (let key of data) {
                 results.appendChild(displayResults(key))
             }
-            Prism.highlightAll()
+            Prism.highlightAllUnder(results)
             ifOwn = ''
         })
 })
@@ -68,6 +79,14 @@ document.querySelector("#searchInput").addEventListener("keyup", event => {
     document.querySelector("#searchButton").click()
     event.preventDefault()
 });
+
+searchInput.addEventListener('input', function () {
+    if (!searchInput.value) {
+        resultArea.innerHTML = ''
+        return;
+    }
+    document.querySelector('#searchButton').click()
+})
 
 
 
@@ -96,7 +115,7 @@ document.querySelector('#searchResults').addEventListener('click', function (eve
         copyCode = event.target.dataset['code']
         copyOriginal = event.target.dataset['pk']
         copyDescription = event.target.dataset['description']
-        let copyDate = getDate()
+        copyDate = new Date()
 
         copyDict = {
             "language": copyLanguage,
@@ -123,7 +142,6 @@ document.querySelector('#searchResults').addEventListener('click', function (eve
 
     }
 })
-
 
 function getDate() {
     let today = new Date();

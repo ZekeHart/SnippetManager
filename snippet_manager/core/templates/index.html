@@ -4,7 +4,7 @@
 
 {% block content %}
 
-<a href="{% url 'add-snippet' %}">Add a code snippet</a>
+
 <div class="recentSnips">
     <button id="snip0Button">{{ snip0.title }}</button>
     <button id="snip1Button">{{ snip1.title }}</button>
@@ -25,12 +25,11 @@
     </div>
     <div id="snip2" class="hideSnip">
         <div class='code-toolbar'>
+
             <pre class='line-numbers language-{{ snip2.language }}'><code class="language-{{ snip2.language }}"><strong>### {{ snip.language }} ###</strong>
         {{ snip2.code }}</code></pre>
+
         </div>
     </div>
 </div>
-
-
-
 {% endblock %}
