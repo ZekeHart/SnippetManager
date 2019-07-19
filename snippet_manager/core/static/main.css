@@ -13,10 +13,11 @@ body {
 
 .snippet {
     margin: 0 20%;
+    margin-bottom: 20px;
 }
 
 .recentSnips {
-    display: flex;
+    /* display: flex; */
     width: 100%;
     justify-content:center;
 }
@@ -43,4 +44,8 @@ body {
 }
 #searchButton {
     height: 39px;
+}
+
+.snippet-title {
+    font-size: 1.3rem;
 }
