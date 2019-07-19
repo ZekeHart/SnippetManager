@@ -2,13 +2,17 @@
 let results
 let searchTerm
 let cleanSearch
+var ifOwn = ''
+var dropDownChoice
 
 const searchAttr = document.querySelector('#searchTerm')
+dropDownChoice = searchAttr.value
 const Prism = require('./prism.js')
 const searchButton = document.querySelector('#searchButton')
 const searchBox = document.querySelector('#searchBox')
 if (document.querySelector('#loggedIn')) {
-    let copyUser = document.querySelector('#loggedIn').dataset['username']
+    var copyUser = document.querySelector('#loggedIn').dataset['username']
+    var copyUsername = document.querySelector('#loggedIn').dataset['userstring']
 }
 
 function displayResults(key) {
@@ -34,7 +38,14 @@ searchButton.addEventListener('click', function () {
     searchTerm = searchBox.querySelector('input').value
     cleanSearch = encodeURIComponent(searchTerm)
     results = document.querySelector('#searchResults')
-    fetch(`http://localhost:8000/${searchAttr.value}/?search=${cleanSearch}`)
+    dropDownChoice = searchAttr.value
+    if (dropDownChoice === 'own') {
+        ifOwn = copyUsername
+    } else if (dropDownChoice === 'snippet') {
+        ifOwn = ''
+    }
+    console.log('ahhhhh')
+    fetch(`http://localhost:8000/${searchAttr.value}/?search=${cleanSearch}%20${ifOwn}`)
         .then(function (response) {
             return response.json()
         })
@@ -44,6 +55,7 @@ searchButton.addEventListener('click', function () {
                 results.appendChild(displayResults(key))
             }
             Prism.highlightAll()
+            ifOwn = ''
         })
 })
 document.querySelector("#searchInput").addEventListener("keyup", event => {
