@@ -42,12 +42,12 @@ function displayResults(key) {
             <p class="card-text">${key.user} | Added on: ${key.date}</p>
             <p class="card-text text-secondary">${key.description} </p>
     <div class='code-toolbar'>	
-        <pre class='line-numbers language-${key.language.toLowerCase()}'><code class='language-${key.language.toLowerCase()}'>${escapeHtml(key.code)}</code></pre>
+        <pre class='line-numbers language-${key.language.name.toLowerCase()}'><code class='language-${key.language.name.toLowerCase()}'>${escapeHtml(key.code)}</code></pre>
     </div>
 `
     if (document.querySelector('#loggedIn')) {
         resultsDiv.innerHTML += `<div id="copySuccess${key.pk}"></div>
-<button class="copyButton btn btn-primary mx-auto" data-pk="${key.pk}" data-title="${key.title}" data-language="${key.language}" data-description="${key.description}" data-code="${key.code}">Copy</button>
+<button class="copyButton btn btn-primary mx-auto" data-pk="${key.pk}" data-title="${key.title}" data-language="${key.language.pk}" data-description="${key.description}" data-code="${key.code}">Copy</button>
     `
     }
     resultsDiv.innerHTML += `</div></div>`
@@ -125,7 +125,7 @@ document.querySelector('#searchResults').addEventListener('click', function (eve
         copyDate = new Date()
 
         copyDict = {
-            "language": copyLanguage,
+            "language__pk": copyLanguage,
             "title": copyTitle,
             "code": copyCode,
             "user": copyUser,
