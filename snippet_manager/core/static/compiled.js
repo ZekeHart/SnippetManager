@@ -26,20 +26,18 @@ if (document.querySelector('#loggedIn')) {
     var copyUsername = document.querySelector('#loggedIn').dataset['userstring']
 }
 
-
 function displayResults(key) {
     const resultsDiv = document.createElement('div')
     resultsDiv.classList.add('snippet')
     resultsDiv.innerHTML = `
     <p><strong>${key.title}</strong> | added on: ${key.date}</p>
     <div class='code-toolbar'>	
-        <pre class='line-numbers language-${key.language.toLowerCase()}'><code class='language-${key.language.toLowerCase()}'><strong>### ${key.language} ###</strong>
+        <pre class='line-numbers language-${key.language.name.toLowerCase()}'><code class='language-${key.language.name.toLowerCase()}'><strong>### ${key.language.name.toLowerCase()} ###</strong>
 
 ${escapeHtml(key.code)}</code></pre>
     </div>`
     if (document.querySelector('#loggedIn')) {
         resultsDiv.innerHTML += `<div id="copySuccess${key.pk}"></div>
-
     <button class="copyButton" data-pk="${key.pk}" data-title="${key.title}" data-language="${key.language}" data-description="${key.description}" data-code="${key.code}">Copy</button>
     `
     }
@@ -69,7 +67,6 @@ searchButton.addEventListener('click', function () {
             }
             Prism.highlightAllUnder(results)
             ifOwn = ''
-
         })
 })
 document.querySelector("#searchInput").addEventListener("keyup", event => {
@@ -124,7 +121,6 @@ document.querySelector('#searchResults').addEventListener('click', function (eve
             "description": copyDescription,
             "date": copyDate
         }
-
         // console.log(copyDict)
         console.log(JSON.stringify(copyDict))
         fetch('http://localhost:8000/snippets/', {
@@ -138,7 +134,6 @@ document.querySelector('#searchResults').addEventListener('click', function (eve
             .catch(error => console.error('Error:', error));
         let copySuccess = '#copySuccess' + copyOriginal
         document.querySelector(copySuccess).innerHTML = '<p>You made a copy to your profile!</p>'
-
 
     }
 })
