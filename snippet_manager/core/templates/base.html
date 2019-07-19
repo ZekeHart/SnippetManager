@@ -10,28 +10,37 @@
     <title>Code Snippet Manager</title>
     <script src="{% static 'compiled.js' %}" defer></script>
     <link rel="stylesheet" href="{% static 'prism.css' %}" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="{% static 'main.css' %}" />
 </head>
 <header>
-    <a href="{% url 'index' $}">HOME</a><br>
-    <br>
-    <select id='searchTerm'>
-        <option value='snippets'>All users' snippets</option>
-        <option value='own'>My own snippets</option>
-    </select>
-    <div id='searchBox'>
-        <input type="text" id="searchInput">
-        <button id="searchButton" class='buttons' type="submit">Search</button>
-    </div>
     {% load socialaccount %}
-    {% if user.is_authenticated %}
-    <p>Welcome {{ user.username }} !!! | <a id="loggedIn" data-username="{{ user.pk }}"
-            href="{% url 'user-home' user.username %}">Your snippets</a> | <a href="{% url 'account_logout' %}">Sign
-            Out</a></p>
-    {% else %}
-    <a href="{% url 'account_login' %}">Sign In</a>
-    <a href="{% provider_login_url 'github' %}">Sign In With GitHub</a>
-    {% endif %}
+    <nav class='nav justify-content-between border-dark border-bottom bg-light fixed-top shadow'>
+        <div class="row justify-content-start">
+                <select id='searchTerm' class="btn btn-outline-secondary">
+                        <option value='snippets'>All users' snippets</option>
+                        <option value='own'>My own snippets</option>
+                    </select>
+                    <div id='searchBox'>
+                        <input type="text" id="searchInput"><button id="searchButton" class='buttons btn btn-outline-primary' type="submit">Search</button>
+                    </div>
+        </div>
+        <div class="row justify-content-end">
+            {% if user.is_authenticated %}
+            <a class="nav-link align-middle text-secondary font-weight-light">Welcome, {{ user.username }}!</a>
+            <a class="nav-link align-middle" href="{% url 'add-snippet' %}">Add snippet</a>
+            <a class='nav-link align-middle' id="loggedIn" data-username="{{ user.pk }}" href="{% url 'user-home' user.username %}">Your snippets</a>
+            <a class="nav-link align-middle" href="{% url 'account_logout' %}">Sign Out</a>
+            <a class="nav-link align-middle font-weight-bold" href="{% url 'index' %}">Home</a>
+            {% else %}
+            <a class='nav-link align-middle' href="{% url 'account_login' %}">Sign In</a>
+            <a class="nav-link align-middle" href="{% provider_login_url 'github' %}">Sign In With GitHub</a>
+            <a class="nav-link align-middle font-weight-bold" href="{% url 'index' %}">Home</a>
+            {% endif %}
+        </div>    
+    </nav>    
+    <br>
+    
 </header>
 
 <body>
