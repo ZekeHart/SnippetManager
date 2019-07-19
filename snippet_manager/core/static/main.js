@@ -124,7 +124,7 @@ document.querySelector('#searchResults').addEventListener('click', function (eve
             "user": copyUser,
             "original": copyOriginal,
             "description": copyDescription,
-            "date": copyDate
+            "date": getDate()
         }
         // console.log(copyDict)
         console.log(JSON.stringify(copyDict))
