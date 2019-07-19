@@ -26,7 +26,7 @@
     {% load socialaccount %}
     {% if user.is_authenticated %}
     <p>Welcome {{ user.username }} |
-        <a id="loggedIn" data-username="{{ user.pk }}" href="{% url 'user-home' user.username %}">Your snippets</a> |
+        <a id="loggedIn" data-username="{{ user.pk }}" data-userstring="{{ user.username }}" href="{% url 'user-home' user.username %}">Your snippets</a> |
         <a href="{% url 'account_logout' %}">Sign
             Out</a></p>
     {% else %}

@@ -7,9 +7,10 @@ from django.urls import reverse
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.parsers import JSONParser
 from core.serializers import SnippetSerializer
-from rest_framework import status, generics, filters
+from rest_framework import status, generics, filters, viewsets
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
+from rest_framework.views import APIView
 from django_filters.rest_framework import DjangoFilterBackend
 
 from core.forms import addSnippet, editSnippet
@@ -97,10 +98,8 @@ class SnippetList(generics.ListCreateAPIView):
     search_fields = ['language__name', 'title', 'description', 'user__username']
 
 class OwnSnippets(generics.ListCreateAPIView):
+    queryset = Snippet.objects.all()
     serializer_class = SnippetSerializer
     filter_backends = [filters.SearchFilter]
-    search_fields = ['language__name', 'title', 'description', 'user__username']
-    
-    def get_queryset(self, *args, **kwargs):
-        return Snippet.objects.all().filter(user__username=self.request.user)
+    search_fields = ['language__name', 'title', 'code', 'description', 'user__username']
 
