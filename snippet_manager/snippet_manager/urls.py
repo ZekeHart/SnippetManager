@@ -17,6 +17,11 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
+from rest_framework import routers
+# from core.views import OwnSnippetsViewSet
+
+# router = routers.SimpleRouter()
+# router.register(r'own', OwnSnippetsViewSet, basename='')
 
 from core import views
 
@@ -28,7 +33,9 @@ urlpatterns = [
     path('user/<username>/', views.user_home, name='user-home'),
     path('snippets/', views.SnippetList.as_view()),
     path('own/', views.OwnSnippets.as_view()),
+    path('delete/', views.DeleteSnippets.as_view()),
     path('edit/<pk>', views.edit_snippet, name='edit-snippet'),
 ]
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+# urlpatterns += router.urls
