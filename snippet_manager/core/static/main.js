@@ -17,6 +17,7 @@ const searchButton = document.querySelector('#searchButton')
 const searchBox = document.querySelector('#searchBox')
 const searchInput = document.querySelector('#searchInput')
 const resultArea = document.querySelector('#searchResults')
+const pageContent = document.querySelector('.pagecontent')
 
 function escapeHtml(unsafe) {
     return unsafe
@@ -35,17 +36,21 @@ function displayResults(key) {
     const resultsDiv = document.createElement('div')
     resultsDiv.classList.add('snippet')
     resultsDiv.innerHTML = `
-    <p><strong>${key.title}</strong> | added on: ${key.date}</p>
+    <div class="card bg-transparent shadow-sm">
+            <p class="card-header snippet-title"><span class="font-weight-bold">${key.title} </span></p>
+            <div class="card-body">
+            <p class="card-text">${key.user} | Added on: ${key.date}</p>
+            <p class="card-text text-secondary">${key.description} </p>
     <div class='code-toolbar'>	
-        <pre class='line-numbers language-${key.language.toLowerCase()}'><code class='language-${key.language.toLowerCase()}'><strong>### ${key.language} ###</strong>
-
-${escapeHtml(key.code)}</code></pre>
-    </div>`
+        <pre class='line-numbers language-${key.language.toLowerCase()}'><code class='language-${key.language.toLowerCase()}'>${escapeHtml(key.code)}</code></pre>
+    </div>
+`
     if (document.querySelector('#loggedIn')) {
         resultsDiv.innerHTML += `<div id="copySuccess${key.pk}"></div>
-    <button class="copyButton" data-pk="${key.pk}" data-title="${key.title}" data-language="${key.language}" data-description="${key.description}" data-code="${key.code}">Copy</button>
+<button class="copyButton btn btn-primary mx-auto" data-pk="${key.pk}" data-title="${key.title}" data-language="${key.language}" data-description="${key.description}" data-code="${key.code}">Copy</button>
     `
     }
+    resultsDiv.innerHTML += `</div></div>`
     return resultsDiv
 }
 
@@ -67,6 +72,7 @@ searchButton.addEventListener('click', function () {
         })
         .then(function (data) {
             results.innerHTML = ''
+            pageContent.style.display = 'none'
             for (let key of data) {
                 results.appendChild(displayResults(key))
             }
@@ -83,6 +89,7 @@ document.querySelector("#searchInput").addEventListener("keyup", event => {
 searchInput.addEventListener('input', function () {
     if (!searchInput.value) {
         resultArea.innerHTML = ''
+        pageContent.style.display = 'block'
         return;
     }
     document.querySelector('#searchButton').click()

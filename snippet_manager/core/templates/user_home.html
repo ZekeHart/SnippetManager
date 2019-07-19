@@ -5,7 +5,7 @@
 <h1>{{ user.get_username }}</h1>
     {% if snippets %}
         {% for snippet in snippets %}
-        <div class="snippet card bg-transparent">
+        <div class="snippet card bg-transparent shadow-sm">
             <p class="card-header snippet-title"><span class="font-weight-bold">{{ snippet.title }} </span>  <a href="{% url 'edit-snippet' snippet.pk %}" role="button" class="btn btn-danger text-left">EDIT</a></p>
             <div class="card-body">
             <p class="card-text">Added on: {{ snippet.date }}</p>
