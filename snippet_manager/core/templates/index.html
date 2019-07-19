@@ -4,17 +4,20 @@
 
 {% block content %}
 
-
+<h1 class="h2">Recent snippets</h1>
+<br>
 <div class="recentSnips">
-    {% for snip in most_recent %}
-    <div class="snipsDiv">
-        <h3>{{ snip.title }}</h3>
-        <div class='code-toolbar'>
-            <pre class='line-numbers language-{{ snip.language }}'><code class="language-{{ snip.language }}"><strong>### {{ snip.language }} ###</strong>
-	
-{{ snip.code }}</code></pre>
+    {% for snippet in most_recent %}
+    <div class="snippet card bg-transparent">
+            <p class="card-header snippet-title"><span class="font-weight-bold">{{ snippet.title }} </span></p>
+            <div class="card-body">
+            <p class="card-text">{{ snippet.user.username }} | Added on: {{ snippet.date }}</p>
+            <p class="card-text text-secondary">{{ snippet.description }} </p>
+            <pre class='line-numbers'><code class="language-{{ snippet.language.code }}"><strong>### {{ snippet.language.name }} ###</strong>
+
+{{ snippet.code }}</code></pre>
+            </div>
         </div>
-    </div>
     {% endfor %}
 </div>
 {% endblock %}
