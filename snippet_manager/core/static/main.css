@@ -26,6 +26,12 @@ body {
     padding: 1rem;
     max-width: 50%;
     text-align: center;
+
+}
+
+.hideSnip {
+    display: none;
+    background: red;
     /* margin: 0 20%; */
 }
 
