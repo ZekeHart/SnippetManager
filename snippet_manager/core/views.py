@@ -14,7 +14,7 @@ from rest_framework.views import APIView
 from django_filters.rest_framework import DjangoFilterBackend
 
 from core.forms import addSnippet, editSnippet
-from core.models import Snippet, Language
+from core.models import Snippet
 
 
 def index(request):
@@ -114,7 +114,7 @@ class SnippetList(generics.ListCreateAPIView):
     serializer_class = SnippetSerializer
     filter_backends = [filters.SearchFilter]
     search_fields = [
-        'language__name', 'title', 'description', 'user__username'
+        'language', 'title', 'description', 'user__username'
     ]
 
 
@@ -123,7 +123,7 @@ class OwnSnippets(generics.ListCreateAPIView):
     serializer_class = SnippetSerializer
     filter_backends = [filters.SearchFilter]
     search_fields = [
-        'language__name', 'title', 'code', 'description', 'user__username'
+        'language', 'title', 'code', 'description', 'user__username'
     ]
 
 
