@@ -14,6 +14,7 @@ class Snippet (models.Model):
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
 
     original = models.ForeignKey('self', on_delete=models.SET_NULL, null=True, blank=True)
+    times_copied = models.PositiveIntegerField(default=0)
 
     def get_absolute_url(self):
         return reverse('snippet', args=[str(self.pk)])
