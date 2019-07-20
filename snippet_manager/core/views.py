@@ -108,6 +108,10 @@ def user_home(request, username):
     else:
         return HttpResponseRedirect(reverse('index.html'))
 
+def snippet_detail(request, pk):
+    snippet = get_object_or_404(Snippet, pk=pk)
+
+    return render(request, 'snippet_detail.html', {'snippet': snippet})
 
 class SnippetList(generics.ListCreateAPIView):
     queryset = Snippet.objects.all()
