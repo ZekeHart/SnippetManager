@@ -3,8 +3,13 @@
 
 
 {% block content %}
-
-<h1 class="h2">Recent snippets</h1>
+<div class="titleDiv">
+    <hr class="titleBorder border-danger">
+    <h1 class="titleTop">RUN</h1>
+    <h1 class="titleBot">DMZ</h1>
+    <hr class="titleBorder border-danger">
+</div>
+<h2 class="h2">Recent snippets</h2>
 <br>
 <div class="recentSnips">
     <div class="snippetTop card bg-transparent bg-light shadow-sm" id="snip0Button">
@@ -32,7 +37,6 @@
 <div class="snippetWindow">
     <div id="snip0" class="hideSnip snippetBot">
         <div class="snippet card bg-light shadow-sm">
-            <p class="card-header snippet-title"><span class="font-weight-bold">{{ snip0.title }} </span></p>
             <div class="card-body">
                 <p class="card-text">{{ snip0.user.username }} | Added on: {{ snip0.date }}</p>
                 <p class="card-text text-secondary">{{ snip0.description }} </p>
@@ -44,7 +48,6 @@
     </div>
     <div id="snip1" class="hideSnip snippetBot">
         <div class="snippet card bg-light shadow-sm">
-            <p class="card-header snippet-title"><span class="font-weight-bold">{{ snip1.title }} </span></p>
             <div class="card-body">
                 <p class="card-text">{{ snip1.user.username }} | Added on: {{ snip1.date }}</p>
                 <p class="card-text text-secondary">{{ snip1.description }} </p>
@@ -56,7 +59,6 @@
     </div>
     <div id="snip2" class="hideSnip snippetBot">
         <div class="snippet card bg-light shadow-sm">
-            <p class="card-header snippet-title"><span class="font-weight-bold">{{ snip2.title }} </span></p>
             <div class="card-body">
                 <p class="card-text">{{ snip2.user.username }} | Added on: {{ snip2.date }}</p>
                 <p class="card-text text-secondary">{{ snip2.description }} </p>
