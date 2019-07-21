@@ -163,6 +163,13 @@ function getDate() {
 
 snip0Button.addEventListener('click', function () {
     snip0.classList.toggle('hideSnip')
+    snip0Button.classList.toggle('bg-transparent')
+    if (!snip2Button.classList.contains('bg-transparent')) {
+        snip2Button.classList.add('bg-transparent')
+    }
+    if (!snip1Button.classList.contains('bg-transparent')) {
+        snip1Button.classList.add('bg-transparent')
+    }
     if (!snip2.classList.contains('hideSnip')) {
         snip2.classList.add('hideSnip')
     }
@@ -172,6 +179,13 @@ snip0Button.addEventListener('click', function () {
 })
 snip1Button.addEventListener('click', function () {
     snip1.classList.toggle('hideSnip')
+    snip1Button.classList.toggle('bg-transparent')
+    if (!snip0Button.classList.contains('bg-transparent')) {
+        snip0Button.classList.add('bg-transparent')
+    }
+    if (!snip2Button.classList.contains('bg-transparent')) {
+        snip2Button.classList.add('bg-transparent')
+    }
     if (!snip0.classList.contains('hideSnip')) {
         snip0.classList.add('hideSnip')
     }
@@ -181,6 +195,13 @@ snip1Button.addEventListener('click', function () {
 })
 snip2Button.addEventListener('click', function () {
     snip2.classList.toggle('hideSnip')
+    snip2Button.classList.toggle('bg-transparent')
+    if (!snip0Button.classList.contains('bg-transparent')) {
+        snip0Button.classList.add('bg-transparent')
+    }
+    if (!snip1Button.classList.contains('bg-transparent')) {
+        snip1Button.classList.add('bg-transparent')
+    }
     if (!snip0.classList.contains('hideSnip')) {
         snip0.classList.add('hideSnip')
     }
