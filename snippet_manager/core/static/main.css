@@ -11,22 +11,27 @@ body {
     background-image: url("https://www.transparenttextures.com/patterns/escheresque.png");
 }
 
-.snippet {
-    margin: 0 20%;
-    margin-bottom: 20px;
+.snippetTop {
+    /* margin: 0 20%; */
+    /* margin-bottom: 20px; */
+    width: 30%;
 }
 
 .recentSnips {
-    /* display: flex; */
+    display: flex;
     width: 100%;
     justify-content:center;
 }
 
-.snipsDiv {
-    padding: 1rem;
-    max-width: 50%;
-    text-align: center;
+.snippetWindow {
+    display: flex;
+    width: 100%;
+    justify-content:center;
 
+}
+
+.snippetBot {
+    width: 90%;
 }
 
 .hideSnip {

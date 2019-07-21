@@ -46,8 +46,10 @@ function displayResults(key) {
     </div>
 `
     if (document.querySelector('#loggedIn')) {
-        resultsDiv.innerHTML += `<div id="copySuccess${key.pk}"></div>
-<button class="copyButton btn btn-primary mx-auto" data-pk="${key.pk}" data-title="${key.title}" data-language="${key.language.pk}" data-description="${key.description}" data-code="${key.code}">Copy</button>
+        resultsDiv.innerHTML += `<div class="alert-primary" id="copySuccess${key.pk}"></div><div class="alert-danger" id="deleteSuccess${key.pk}"></div>
+<button class="copyButton btn btn-primary mx-auto" data-pk="${key.pk}" data-title="${key.title}" data-language="${key.language.pk}" data-description="${key.description}" data-code="${key.code}">Add to your Library</button>
+
+<button class="deleteButton btn btn-danger" data-pk="${key.pk}">Delete</button>
     `
     }
     resultsDiv.innerHTML += `</div></div>`
@@ -186,3 +188,31 @@ snip2Button.addEventListener('click', function () {
         snip1.classList.add('hideSnip')
     }
 })
+
+let toDelete
+let deleteDict
+
+// document.querySelector('#searchResults').addEventListener('click', function (event) {
+//     if (event.target && event.target.matches('.deleteButton')) {
+//         toDelete = event.target.dataset['pk']
+//         console.log(toDelete)
+
+//         deleteDict = {
+//             "pk": toDelete
+//         }
+//         // console.log(copyDict)
+//         console.log('test', JSON.stringify(deleteDict))
+//         fetch('http://localhost:8000/delete/', {
+//             method: 'DELETE',
+//             body: JSON.stringify(deleteDict),
+//             headers: {
+//                 'Content-Type': 'application/json'
+//             }
+//         }).then(res => res.json())
+//             .then(response => console.log('Success:', JSON.stringify(response)))
+//             .catch(error => console.error('Error:', error));
+//         // let copySuccess = '#copySuccess' + copyOriginal
+//         // document.querySelector(copySuccess).innerHTML = '<p>You made a copy to your profile!</p>'
+
+//     }
+// })
