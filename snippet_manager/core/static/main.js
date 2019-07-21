@@ -45,12 +45,14 @@ function displayResults(key) {
         <pre class='line-numbers language-${key.language.name.toLowerCase()}'><code class='language-${key.language.name.toLowerCase()}'>${escapeHtml(key.code)}</code></pre>
     </div>
 `
+    console.log('key.user:', key.user)
+    console.log('copyUser:', copyUser)
     if (document.querySelector('#loggedIn')) {
         resultsDiv.innerHTML += `<div class="alert-primary" id="copySuccess${key.pk}"></div><div class="alert-danger" id="deleteSuccess${key.pk}"></div>
-<button class="copyButton btn btn-primary mx-auto" data-pk="${key.pk}" data-title="${key.title}" data-language="${key.language.pk}" data-description="${key.description}" data-code="${key.code}">Add to your Library</button>
-
-<button class="deleteButton btn btn-danger" data-pk="${key.pk}">Delete</button>
-    `
+<button class="copyButton btn btn-primary mx-auto" data-pk="${key.pk}" data-title="${key.title}" data-language="${key.language.pk}" data-description="${key.description}" data-code="${key.code}">Add to your Library</button>`
+        if (key.user == copyUser) {
+            resultsDiv.innerHTML += `<button class="deleteButton btn btn-danger" data-pk="${key.pk}">Delete</button>`
+        }
     }
     resultsDiv.innerHTML += `</div></div>`
     return resultsDiv

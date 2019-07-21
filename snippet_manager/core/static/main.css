@@ -86,3 +86,7 @@ body {
     border-width: 1rem;
     margin: 0;
 }
+
+.accentColor {
+    background: rgba(98, 163, 125, 0.8)
+}
