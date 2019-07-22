@@ -17,7 +17,7 @@ class Snippet (models.Model):
     times_copied = models.PositiveIntegerField(default=0)
 
     def get_absolute_url(self):
-        return reverse('snippet', args=[str(self.pk)])
+        return reverse('snippet-detail', args=[str(self.pk)])
 
     def get_times_copied(self):
         return self.copies.count()

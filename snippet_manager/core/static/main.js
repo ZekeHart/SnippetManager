@@ -36,7 +36,7 @@ function displayResults(key) {
     const resultsDiv = document.createElement('div')
     resultsDiv.classList.add('snippet')
     resultsDiv.innerHTML = `
-    <div class="card bg-transparent shadow-sm">
+    <div id="snippet${ key.pk}" class="card bg-transparent shadow-sm">
             <p class="card-header snippet-title"><span class="font-weight-bold">${key.title} </span></p>
             <div class="card-body">
             <p class="card-text">${key.user} | Added on: ${key.date} | Copied ${key.num_times_copied} times</p>
@@ -49,9 +49,9 @@ function displayResults(key) {
     console.log('copyUser:', copyUser)
     if (document.querySelector('#loggedIn')) {
         resultsDiv.innerHTML += `<div class="alert-primary" id="copySuccess${key.pk}"></div><div class="alert-danger" id="deleteSuccess${key.pk}"></div>
-<button class="copyButton btn btn-primary mx-auto" data-pk="${key.pk}" data-title="${key.title}" data-language="${key.language.pk}" data-description="${key.description}" data-code="${key.code}">Add to your Library</button>`
+<button class="copyButton btn btn-primary mx-auto snippetCopyButton${key.pk}" data-pk="${key.pk}" data-title="${key.title}" data-language="${key.language.pk}" data-description="${key.description}" data-code="${key.code}">Add to your Library</button>`
         if (key.user == copyUser) {
-            resultsDiv.innerHTML += `<button class="deleteButton btn btn-danger" data-pk="${key.pk}">Delete</button>`
+            resultsDiv.innerHTML += `<button class="deleteButton btn btn-danger snippetDeleteButton${key.pk}" data-pk="${key.pk}">Delete</button>`
         }
     }
     resultsDiv.innerHTML += `</div></div>`
@@ -162,80 +162,96 @@ function getDate() {
 
     today = yyyy + '-' + mm + '-' + dd;
 }
-
-snip0Button.addEventListener('click', function () {
-    snip0.classList.toggle('hideSnip')
-    snip0Button.classList.toggle('bg-transparent')
-    if (!snip2Button.classList.contains('bg-transparent')) {
-        snip2Button.classList.add('bg-transparent')
-    }
-    if (!snip1Button.classList.contains('bg-transparent')) {
-        snip1Button.classList.add('bg-transparent')
-    }
-    if (!snip2.classList.contains('hideSnip')) {
-        snip2.classList.add('hideSnip')
-    }
-    if (!snip1.classList.contains('hideSnip')) {
-        snip1.classList.add('hideSnip')
-    }
-})
-snip1Button.addEventListener('click', function () {
-    snip1.classList.toggle('hideSnip')
-    snip1Button.classList.toggle('bg-transparent')
-    if (!snip0Button.classList.contains('bg-transparent')) {
-        snip0Button.classList.add('bg-transparent')
-    }
-    if (!snip2Button.classList.contains('bg-transparent')) {
-        snip2Button.classList.add('bg-transparent')
-    }
-    if (!snip0.classList.contains('hideSnip')) {
-        snip0.classList.add('hideSnip')
-    }
-    if (!snip2.classList.contains('hideSnip')) {
-        snip2.classList.add('hideSnip')
-    }
-})
-snip2Button.addEventListener('click', function () {
-    snip2.classList.toggle('hideSnip')
-    snip2Button.classList.toggle('bg-transparent')
-    if (!snip0Button.classList.contains('bg-transparent')) {
-        snip0Button.classList.add('bg-transparent')
-    }
-    if (!snip1Button.classList.contains('bg-transparent')) {
-        snip1Button.classList.add('bg-transparent')
-    }
-    if (!snip0.classList.contains('hideSnip')) {
-        snip0.classList.add('hideSnip')
-    }
-    if (!snip1.classList.contains('hideSnip')) {
-        snip1.classList.add('hideSnip')
-    }
-})
-
+if (snip0Button) {
+    snip0Button.addEventListener('click', function () {
+        snip0.classList.toggle('hideSnip')
+        snip0Button.classList.toggle('bg-transparent')
+        if (!snip2Button.classList.contains('bg-transparent')) {
+            snip2Button.classList.add('bg-transparent')
+        }
+        if (!snip1Button.classList.contains('bg-transparent')) {
+            snip1Button.classList.add('bg-transparent')
+        }
+        if (!snip2.classList.contains('hideSnip')) {
+            snip2.classList.add('hideSnip')
+        }
+        if (!snip1.classList.contains('hideSnip')) {
+            snip1.classList.add('hideSnip')
+        }
+    })
+}
+if (snip1Button) {
+    snip1Button.addEventListener('click', function () {
+        snip1.classList.toggle('hideSnip')
+        snip1Button.classList.toggle('bg-transparent')
+        if (!snip0Button.classList.contains('bg-transparent')) {
+            snip0Button.classList.add('bg-transparent')
+        }
+        if (!snip2Button.classList.contains('bg-transparent')) {
+            snip2Button.classList.add('bg-transparent')
+        }
+        if (!snip0.classList.contains('hideSnip')) {
+            snip0.classList.add('hideSnip')
+        }
+        if (!snip2.classList.contains('hideSnip')) {
+            snip2.classList.add('hideSnip')
+        }
+    })
+}
+if (snip2Button) {
+    snip2Button.addEventListener('click', function () {
+        snip2.classList.toggle('hideSnip')
+        snip2Button.classList.toggle('bg-transparent')
+        if (!snip0Button.classList.contains('bg-transparent')) {
+            snip0Button.classList.add('bg-transparent')
+        }
+        if (!snip1Button.classList.contains('bg-transparent')) {
+            snip1Button.classList.add('bg-transparent')
+        }
+        if (!snip0.classList.contains('hideSnip')) {
+            snip0.classList.add('hideSnip')
+        }
+        if (!snip1.classList.contains('hideSnip')) {
+            snip1.classList.add('hideSnip')
+        }
+    })
+}
 let toDelete
-let deleteDict
 
 document.querySelector('#searchResults').addEventListener('click', function (event) {
     if (event.target && event.target.matches('.deleteButton')) {
         toDelete = event.target.dataset['pk']
-        console.log(toDelete)
 
-        deleteDict = {
-            "pk": 35,
-        }
-        // console.log(copyDict)
-        console.log('test', JSON.stringify(deleteDict))
-        fetch('http://localhost:8000/delete/', {
+        fetch(`http://localhost:8000/delete/${toDelete}`, {
             method: 'DELETE',
-            body: JSON.stringify(deleteDict),
             headers: new Headers({
                 'Content-Type': 'application/json'
             })
-        }).then(res => res.text())
+        }).then(res => res.json())
             .then(response => console.log('Success:', JSON.stringify(response)))
-            .catch(error => console.error('Error:', error));
-        // let copySuccess = '#copySuccess' + copyOriginal
-        // document.querySelector(copySuccess).innerHTML = '<p>You made a copy to your profile!</p>'
-
+            .catch(error => console.error('Error:', error))
+        document.querySelector(`#snippet${toDelete}`).innerHTML = "<p class='alert-danger'>Your Snippet has been deleted!</p>"
+        document.querySelector(`.snippetCopyButton${toDelete}`).style.display = 'none'
+        document.querySelector(`.snippetDeleteButton${toDelete}`).style.display = 'none'
     }
 })
+
+
+if (document.querySelector('#snippetHome')) {
+    document.querySelector('#snippetHome').addEventListener('click', function (event) {
+        if (event.target && event.target.matches('.deleteButton')) {
+            console.log('ugggh')
+            toDelete = event.target.dataset['pk']
+            console.log(toDelete)
+
+            fetch(`http://localhost:8000/delete/${toDelete}`, {
+                method: 'DELETE',
+                headers: new Headers({
+                    'Content-Type': 'application/json'
+                })
+            })
+            document.querySelector(`.snippet${toDelete}`).innerHTML = "<p class='alert-danger'>Your Snippet has been deleted!</p>"
+        }
+    })
+}
+
