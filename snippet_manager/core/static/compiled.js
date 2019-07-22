@@ -37,7 +37,7 @@ function displayResults(key) {
     const resultsDiv = document.createElement('div')
     resultsDiv.classList.add('snippet')
     resultsDiv.innerHTML = `
-    <div class="card bg-transparent shadow-sm">
+    <div id="snippet${ key.pk}" class="card bg-transparent shadow-sm">
             <p class="card-header snippet-title"><span class="font-weight-bold">${key.title} </span></p>
             <div class="card-body">
             <p class="card-text">${key.user} | Added on: ${key.date}</p>
@@ -50,9 +50,9 @@ function displayResults(key) {
     console.log('copyUser:', copyUser)
     if (document.querySelector('#loggedIn')) {
         resultsDiv.innerHTML += `<div class="alert-primary" id="copySuccess${key.pk}"></div><div class="alert-danger" id="deleteSuccess${key.pk}"></div>
-<button class="copyButton btn btn-primary mx-auto" data-pk="${key.pk}" data-title="${key.title}" data-language="${key.language.pk}" data-description="${key.description}" data-code="${key.code}">Add to your Library</button>`
+<button class="copyButton btn btn-primary mx-auto snippetCopyButton${key.pk}" data-pk="${key.pk}" data-title="${key.title}" data-language="${key.language.pk}" data-description="${key.description}" data-code="${key.code}">Add to your Library</button>`
         if (key.user == copyUser) {
-            resultsDiv.innerHTML += `<button class="deleteButton btn btn-danger" data-pk="${key.pk}">Delete</button>`
+            resultsDiv.innerHTML += `<button class="deleteButton btn btn-danger snippetDeleteButton${key.pk}" data-pk="${key.pk}">Delete</button>`
         }
     }
     resultsDiv.innerHTML += `</div></div>`
@@ -219,13 +219,10 @@ let deleteDict
 document.querySelector('#searchResults').addEventListener('click', function (event) {
     if (event.target && event.target.matches('.deleteButton')) {
         toDelete = event.target.dataset['pk']
-        console.log(toDelete)
 
         deleteDict = {
             "pk": toDelete,
         }
-        // console.log(copyDict)
-        console.log('test', JSON.stringify(deleteDict))
         fetch(`http://localhost:8000/delete/${toDelete}`, {
             method: 'DELETE',
             body: JSON.stringify(deleteDict),
@@ -234,10 +231,10 @@ document.querySelector('#searchResults').addEventListener('click', function (eve
             })
         }).then(res => res.json())
             .then(response => console.log('Success:', JSON.stringify(response)))
-            .catch(error => console.error('Error:', error));
-        // let copySuccess = '#copySuccess' + copyOriginal
-        // document.querySelector(copySuccess).innerHTML = '<p>You made a copy to your profile!</p>'
-
+            .catch(error => console.error('Error:', error))
+        document.querySelector(`#snippet${toDelete}`).innerHTML = "<p class='alert-danger'>Your Snippet has been deleted!</p>"
+        document.querySelector(`.snippetCopyButton${toDelete}`).style.display = 'none'
+        document.querySelector(`.snippetDeleteButton${toDelete}`).style.display = 'none'
     }
 })
 },{"./prism.js":2}],2:[function(require,module,exports){
