@@ -39,7 +39,7 @@ function displayResults(key) {
     <div id="snippet${ key.pk}" class="card bg-transparent shadow-sm">
             <p class="card-header snippet-title"><span class="font-weight-bold">${key.title} </span></p>
             <div class="card-body">
-            <p class="card-text">${key.user} | Added on: ${key.date}</p>
+            <p class="card-text">${key.user} | Added on: ${key.date} | Copied ${key.num_times_copied} times</p>
             <p class="card-text text-secondary">${key.description} </p>
     <div class='code-toolbar'>	
         <pre class='line-numbers language-${key.language.toLowerCase()}'><code class='language-${key.language.toLowerCase()}'>${escapeHtml(key.code)}</code></pre>
@@ -236,6 +236,7 @@ document.querySelector('#searchResults').addEventListener('click', function (eve
     }
 })
 
+
 if (document.querySelector('#snippetHome')) {
     document.querySelector('#snippetHome').addEventListener('click', function (event) {
         if (event.target && event.target.matches('.deleteButton')) {
@@ -253,3 +254,4 @@ if (document.querySelector('#snippetHome')) {
         }
     })
 }
+

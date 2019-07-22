@@ -13,11 +13,14 @@ class Snippet (models.Model):
     code = models.TextField(blank=True, null=True)
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
 
-    original = models.ForeignKey('self', on_delete=models.SET_NULL, null=True, blank=True)
+    original = models.ForeignKey('self', on_delete=models.SET_NULL, null=True, blank=True, related_name='copies')
     times_copied = models.PositiveIntegerField(default=0)
 
     def get_absolute_url(self):
         return reverse('snippet-detail', args=[str(self.pk)])
+
+    def get_times_copied(self):
+        return self.copies.count()
 
     def __str__(self):
         return f'{self.title}'
