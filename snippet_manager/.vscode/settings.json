@@ -2,5 +2,5 @@
     "python.pythonPath": "/Users/matthewspeidel/.local/share/virtualenvs/snippet_manager-kQ-r5Xo2/bin/python",
     "python.linting.enabled": false,
     "javascript.validate.enable": false,
-    
+    "standard.enable": true,
 }
