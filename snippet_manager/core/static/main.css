@@ -90,3 +90,12 @@ body {
 .accentColor {
     background: rgba(98, 163, 125, 0.8)
 }
+
+.cardTop {
+    display: flex;
+    justify-content: space-between;
+}
+
+.cardDesc {
+    max-width: 50%;
+}
