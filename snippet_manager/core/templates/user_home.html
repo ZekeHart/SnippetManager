@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 
-
+{% block content %}
 <h1>Welcome {{ user.get_username }}</h1>
 {% if snippets %}
 <h2>Your Snippets</h2>
