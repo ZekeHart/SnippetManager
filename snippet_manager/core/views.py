@@ -19,6 +19,8 @@ from core.models import Snippet
 
 def index(request):
     most_recent = Snippet.objects.order_by('-date')[:3]
+    for snip in Snippet.objects.all():
+        snip.times_copied = Snippet.objects.filter(original=snip.pk).count()
     if request.method == "GET":
         search_text = request.GET.get('search_text', '')
         if search_text is not None and search_text != u"":
@@ -115,6 +117,8 @@ def snippet_detail(request, pk):
 
 class SnippetList(generics.ListCreateAPIView):
     queryset = Snippet.objects.all()
+    for snippet in queryset:
+        snippet.times_copied = Snippet.objects.filter(original=snippet).count()
     serializer_class = SnippetSerializer
     filter_backends = [filters.SearchFilter]
     search_fields = [
