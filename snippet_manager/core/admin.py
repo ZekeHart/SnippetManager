@@ -1,9 +1,7 @@
 from django.contrib import admin
 
-from core.models import Language, Snippet
+from core.models import Snippet
 # Register your models here.
-
-admin.site.register(Language)
 
 @admin.register(Snippet)
 class SnippetAdmin(admin.ModelAdmin):

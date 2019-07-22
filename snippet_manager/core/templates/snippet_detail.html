@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    {% if snippet %}
+    <div class="snippet card bg-transparent shadow-sm">
+        <p class="card-header snippet-title"><span class="font-weight-bold">{{ snippet.title }} </span>  <a href="{% url 'edit-snippet' snippet.pk %}" role="button" class="btn btn-danger text-left">EDIT</a></p>
+        <div class="card-body">
+        <p class="card-text">Added on: {{ snippet.date }}</p>
+        <p class="card-text text-secondary">{{ snippet.description }} </p>
+        <pre class='line-numbers'><code class="language-{{ snippet.language }}"><strong>### {{ snippet.language }} ###</strong>
+
+{{ snippet.code }}</code></pre>
+        </div>
+    </div>
+    {% endif %}
+{% endblock %}

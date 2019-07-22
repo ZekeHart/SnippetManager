@@ -42,7 +42,7 @@ function displayResults(key) {
             <p class="card-text">${key.user} | Added on: ${key.date}</p>
             <p class="card-text text-secondary">${key.description} </p>
     <div class='code-toolbar'>	
-        <pre class='line-numbers language-${key.language.name.toLowerCase()}'><code class='language-${key.language.name.toLowerCase()}'>${escapeHtml(key.code)}</code></pre>
+        <pre class='line-numbers language-${key.language.toLowerCase()}'><code class='language-${key.language.toLowerCase()}'>${escapeHtml(key.code)}</code></pre>
     </div>
 `
     console.log('key.user:', key.user)
@@ -129,7 +129,7 @@ document.querySelector('#searchResults').addEventListener('click', function (eve
         copyDate = new Date()
 
         copyDict = {
-            "language__pk": copyLanguage,
+            "language": copyLanguage,
             "title": copyTitle,
             "code": copyCode,
             "user": copyUser,
