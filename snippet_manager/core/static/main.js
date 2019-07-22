@@ -221,17 +221,17 @@ document.querySelector('#searchResults').addEventListener('click', function (eve
         console.log(toDelete)
 
         deleteDict = {
-            "pk": 35,
+            "pk": toDelete,
         }
         // console.log(copyDict)
         console.log('test', JSON.stringify(deleteDict))
-        fetch('http://localhost:8000/delete/', {
+        fetch(`http://localhost:8000/delete/${toDelete}`, {
             method: 'DELETE',
             body: JSON.stringify(deleteDict),
             headers: new Headers({
                 'Content-Type': 'application/json'
             })
-        }).then(res => res.text())
+        }).then(res => res.json())
             .then(response => console.log('Success:', JSON.stringify(response)))
             .catch(error => console.error('Error:', error));
         // let copySuccess = '#copySuccess' + copyOriginal
