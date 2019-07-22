@@ -2,19 +2,24 @@
 {% load static %}
 
 {% block content %}
-<h1>{{ user.get_username }}</h1>
-    {% if snippets %}
-        {% for snippet in snippets %}
-        <div class="snippet card bg-transparent shadow-sm">
-            <p class="card-header snippet-title"><span class="font-weight-bold">{{ snippet.title }} </span>  <a href="{% url 'edit-snippet' snippet.pk %}" role="button" class="btn btn-danger text-left">EDIT</a></p>
-            <div class="card-body">
-            <p class="card-text">Added on: {{ snippet.date }}</p>
-            <p class="card-text text-secondary">{{ snippet.description }} </p>
-            <pre class='line-numbers'><code class="language-{{ snippet.language }}"><strong>### {{ snippet.language }} ###</strong>
+<h1>Welcome {{ user.get_username }}</h1>
+{% if snippets %}
+<h2>Your Snippets</h2>
+{% for snippet in snippets %}
+<div class="snippet card bg-transparent shadow-sm">
+    <p class="card-header snippet-title"><span class="font-weight-bold">{{ snippet.title }} </span> <a
+            href="{% url 'edit-snippet' snippet.pk %}" role="button" class="btn btn-danger text-left">EDIT</a></p>
+    <div class="card-body">
+        <p class="card-text">Added on: {{ snippet.date }}</p>
+        <p class="card-text text-secondary">{{ snippet.description }} </p>
+        <pre class='line-numbers'><code class="language-{{ snippet.language }}"><strong>### {{ snippet.language }} ###</strong>
 
 {{ snippet.code }}</code></pre>
-            </div>
-        </div>
-        {% endfor %}
-    {% endif %}
+        <a href="/snippets/{{ snippet.pk }}">Snippet Detail Page</a>
+        {% if snippet.original %}
+        <a href="{{ snippet.original.get_absolute_url }}">Original Snippet Detail Page</a>
+        {% endif %}
+    </div>
+</div> {% endfor %} {% else %} <h2>You haven't made any Snippets yet</h2>
+{% endif %}
 {% endblock %}
