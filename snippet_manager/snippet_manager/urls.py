@@ -34,7 +34,7 @@ urlpatterns = [
     path('snippets/', views.SnippetList.as_view()),
     path('snippets/<pk>', views.snippet_detail, name='snippet-detail'),
     path('own/', views.OwnSnippets.as_view()),
-    path('delete/', views.DeleteSnippets.as_view()),
+    path('delete/<pk>', views.DeleteSnippets.as_view()),
     path('edit/<pk>', views.edit_snippet, name='edit-snippet'),
 ]
 
