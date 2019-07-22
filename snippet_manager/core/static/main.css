@@ -11,22 +11,27 @@ body {
     background-image: url("https://www.transparenttextures.com/patterns/escheresque.png");
 }
 
-.snippet {
-    margin: 0 20%;
-    margin-bottom: 20px;
+.snippetTop {
+    /* margin: 0 20%; */
+    /* margin-bottom: 20px; */
+    width: 30%;
 }
 
 .recentSnips {
-    /* display: flex; */
+    display: flex;
     width: 100%;
     justify-content:center;
 }
 
-.snipsDiv {
-    padding: 1rem;
-    max-width: 50%;
-    text-align: center;
+.snippetWindow {
+    display: flex;
+    width: 100%;
+    justify-content:center;
 
+}
+
+.snippetBot {
+    width: 90%;
 }
 
 .hideSnip {
@@ -52,4 +57,36 @@ body {
 
 .copier-button {
     align-content: center;
+}
+
+.titleTop {
+    text-align: center;
+    padding-bottom: 0px;
+    margin: 0;
+    color: white;
+    background: black;
+}
+.titleBot {
+    text-align: center;
+    padding-top: 0px;
+    margin: 0;
+    color: white;
+    background: black;
+}
+
+.titleDiv {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    height: 12rem;
+}
+
+.titleBorder {
+    border-width: 1rem;
+    margin: 0;
+}
+
+.accentColor {
+    background: rgba(98, 163, 125, 0.8)
 }

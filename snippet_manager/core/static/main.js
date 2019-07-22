@@ -45,10 +45,14 @@ function displayResults(key) {
         <pre class='line-numbers language-${key.language.toLowerCase()}'><code class='language-${key.language.toLowerCase()}'>${escapeHtml(key.code)}</code></pre>
     </div>
 `
+    console.log('key.user:', key.user)
+    console.log('copyUser:', copyUser)
     if (document.querySelector('#loggedIn')) {
-        resultsDiv.innerHTML += `<div id="copySuccess${key.pk}"></div>
-<button class="copyButton btn btn-primary mx-auto" data-pk="${key.pk}" data-title="${key.title}" data-language="${key.language}" data-description="${key.description}" data-code="${key.code}">Copy</button>
-    `
+        resultsDiv.innerHTML += `<div class="alert-primary" id="copySuccess${key.pk}"></div><div class="alert-danger" id="deleteSuccess${key.pk}"></div>
+<button class="copyButton btn btn-primary mx-auto" data-pk="${key.pk}" data-title="${key.title}" data-language="${key.language.pk}" data-description="${key.description}" data-code="${key.code}">Add to your Library</button>`
+        if (key.user == copyUser) {
+            resultsDiv.innerHTML += `<button class="deleteButton btn btn-danger" data-pk="${key.pk}">Delete</button>`
+        }
     }
     resultsDiv.innerHTML += `</div></div>`
     return resultsDiv
@@ -161,6 +165,13 @@ function getDate() {
 
 snip0Button.addEventListener('click', function () {
     snip0.classList.toggle('hideSnip')
+    snip0Button.classList.toggle('bg-transparent')
+    if (!snip2Button.classList.contains('bg-transparent')) {
+        snip2Button.classList.add('bg-transparent')
+    }
+    if (!snip1Button.classList.contains('bg-transparent')) {
+        snip1Button.classList.add('bg-transparent')
+    }
     if (!snip2.classList.contains('hideSnip')) {
         snip2.classList.add('hideSnip')
     }
@@ -170,6 +181,13 @@ snip0Button.addEventListener('click', function () {
 })
 snip1Button.addEventListener('click', function () {
     snip1.classList.toggle('hideSnip')
+    snip1Button.classList.toggle('bg-transparent')
+    if (!snip0Button.classList.contains('bg-transparent')) {
+        snip0Button.classList.add('bg-transparent')
+    }
+    if (!snip2Button.classList.contains('bg-transparent')) {
+        snip2Button.classList.add('bg-transparent')
+    }
     if (!snip0.classList.contains('hideSnip')) {
         snip0.classList.add('hideSnip')
     }
@@ -179,10 +197,45 @@ snip1Button.addEventListener('click', function () {
 })
 snip2Button.addEventListener('click', function () {
     snip2.classList.toggle('hideSnip')
+    snip2Button.classList.toggle('bg-transparent')
+    if (!snip0Button.classList.contains('bg-transparent')) {
+        snip0Button.classList.add('bg-transparent')
+    }
+    if (!snip1Button.classList.contains('bg-transparent')) {
+        snip1Button.classList.add('bg-transparent')
+    }
     if (!snip0.classList.contains('hideSnip')) {
         snip0.classList.add('hideSnip')
     }
     if (!snip1.classList.contains('hideSnip')) {
         snip1.classList.add('hideSnip')
+    }
+})
+
+let toDelete
+let deleteDict
+
+document.querySelector('#searchResults').addEventListener('click', function (event) {
+    if (event.target && event.target.matches('.deleteButton')) {
+        toDelete = event.target.dataset['pk']
+        console.log(toDelete)
+
+        deleteDict = {
+            "pk": 35,
+        }
+        // console.log(copyDict)
+        console.log('test', JSON.stringify(deleteDict))
+        fetch('http://localhost:8000/delete/', {
+            method: 'DELETE',
+            body: JSON.stringify(deleteDict),
+            headers: new Headers({
+                'Content-Type': 'application/json'
+            })
+        }).then(res => res.text())
+            .then(response => console.log('Success:', JSON.stringify(response)))
+            .catch(error => console.error('Error:', error));
+        // let copySuccess = '#copySuccess' + copyOriginal
+        // document.querySelector(copySuccess).innerHTML = '<p>You made a copy to your profile!</p>'
+
     }
 })

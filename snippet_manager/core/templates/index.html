@@ -3,64 +3,66 @@
 
 
 {% block content %}
-
-<h1 class="h2">Recent snippets</h1>
+<div class="titleDiv">
+    <hr class="titleBorder border-danger">
+    <h1 class="titleTop">RUN</h1>
+    <h1 class="titleBot">DMZ</h1>
+    <hr class="titleBorder border-danger">
+</div>
+<h2 class="h2">Recent snippets</h2>
 <br>
 <div class="recentSnips">
-    <div class="snippet card bg-transparent shadow-sm" id="snip0Button">
-      <p class="card-header font-weight-bold">{{ snip0.title }}</p>
-      <div class="card-body">
-        <p class="card-text">{{ snip0.language }}</p>
-        <p class="card-text">{{ snip0.date }}</p>
-      </div>
+    <div class="snippetTop card bg-transparent bg-light shadow-sm" id="snip0Button">
+        <p class="card-header font-weight-bold">{{ snip0.title }}</p>
+        <div class="card-body">
+            <p class="card-text">{{ snip0.language.name }}</p>
+            <p class="card-text">Added on: {{ snip0.date }}</p>
+        </div>
     </div>
-    <div class="snippet card bg-transparent shadow-sm" id="snip1Button">
-      <p class="card-header font-weight-bold">{{ snip1.title }}</p>
-      <div class="card-body">
-        <p class="card-text">{{ snip1.language }}</p>
-        <p class="card-text">{{ snip1.date }}</p>
-      </div>
+    <div class="snippetTop card bg-transparent bg-light shadow-sm" id="snip1Button">
+        <p class="card-header font-weight-bold">{{ snip1.title }}</p>
+        <div class="card-body">
+            <p class="card-text">{{ snip1.language.name }}</p>
+            <p class="card-text">Added on: {{ snip1.date }}</p>
+        </div>
     </div>
-    <div class="snippet card bg-transparent shadow-sm" id="snip2Button">
-      <p class="card-header font-weight-bold">{{ snip2.title }}</p>
-      <div class="card-body">
-        <p class="card-text">{{ snip2.language }}</p>
-        <p class="card-text">{{ snip2.date }}</p>
-      </div>
+    <div class="snippetTop card bg-transparent bg-light shadow-sm" id="snip2Button">
+        <p class="card-header font-weight-bold">{{ snip2.title }}</p>
+        <div class="card-body">
+            <p class="card-text">{{ snip2.language.name }}</p>
+            <p class="card-text">Added on: {{ snip2.date }}</p>
+        </div>
     </div>
 </div>
-<div class="">
-    <div id="snip0" class="hideSnip">
-    <div class="snippet card bg-transparent shadow-sm">
-            <p class="card-header snippet-title"><span class="font-weight-bold">{{ snip0.title }} </span></p>
+<div class="snippetWindow">
+    <div id="snip0" class="hideSnip snippetBot">
+        <div class="snippet card bg-light shadow-sm">
             <div class="card-body">
-            <p class="card-text">{{ snip0.user.username }} | Added on: {{ snip0.date }}</p>
-            <p class="card-text text-secondary">{{ snip0.description }} </p>
-            <pre class='line-numbers'><code class="language-{{ snip0.language }}"><strong>### {{ snip0.language }} ###</strong>
+                <p class="card-text">Created by: {{ snip0.user.username }}</p>
+                <p class="card-text text-secondary">{{ snip0.description }} </p>
+                <pre class='line-numbers'><code class="language-{{ snip0.language.code }}"><strong>### {{ snip0.language.name }} ###</strong>
 
 {{ snip0.code }}</code></pre>
             </div>
         </div>
     </div>
-    <div id="snip1" class="hideSnip">
-    <div class="snippet card bg-transparent shadow-sm">
-            <p class="card-header snippet-title"><span class="font-weight-bold">{{ snip1.title }} </span></p>
+    <div id="snip1" class="hideSnip snippetBot">
+        <div class="snippet card bg-light shadow-sm">
             <div class="card-body">
-            <p class="card-text">{{ snip1.user.username }} | Added on: {{ snip1.date }}</p>
-            <p class="card-text text-secondary">{{ snip1.description }} </p>
-            <pre class='line-numbers'><code class="language-{{ snip1.language }}"><strong>### {{ snip1.language }} ###</strong>
+                <p class="card-text">Created by: {{ snip1.user.username }}</p>
+                <p class="card-text text-secondary">{{ snip1.description }} </p>
+                <pre class='line-numbers'><code class="language-{{ snip1.language.code }}"><strong>### {{ snip1.language.name }} ###</strong>
 
 {{ snip1.code }}</code></pre>
             </div>
         </div>
     </div>
-    <div id="snip2" class="hideSnip">
-    <div class="snippet card bg-transparent shadow-sm">
-            <p class="card-header snippet-title"><span class="font-weight-bold">{{ snip2.title }} </span></p>
+    <div id="snip2" class="hideSnip snippetBot">
+        <div class="snippet card bg-light shadow-sm">
             <div class="card-body">
-            <p class="card-text">{{ snip2.user.username }} | Added on: {{ snip2.date }}</p>
-            <p class="card-text text-secondary">{{ snip2.description }} </p>
-            <pre class='line-numbers'><code class="language-{{ snip2.language }}"><strong>### {{ snip2.language }} ###</strong>
+                <p class="card-text">Created by: {{ snip2.user.username }}</p>
+                <p class="card-text text-secondary">{{ snip2.description }} </p>
+                <pre class='line-numbers'><code class="language-{{ snip2.language.code }}"><strong>### {{ snip2.language.name }} ###</strong>
 
 {{ snip2.code }}</code></pre>
             </div>
