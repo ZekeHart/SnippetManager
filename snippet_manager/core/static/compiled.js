@@ -163,69 +163,68 @@ function getDate() {
 
     today = yyyy + '-' + mm + '-' + dd;
 }
-
-snip0Button.addEventListener('click', function () {
-    snip0.classList.toggle('hideSnip')
-    snip0Button.classList.toggle('bg-transparent')
-    if (!snip2Button.classList.contains('bg-transparent')) {
-        snip2Button.classList.add('bg-transparent')
-    }
-    if (!snip1Button.classList.contains('bg-transparent')) {
-        snip1Button.classList.add('bg-transparent')
-    }
-    if (!snip2.classList.contains('hideSnip')) {
-        snip2.classList.add('hideSnip')
-    }
-    if (!snip1.classList.contains('hideSnip')) {
-        snip1.classList.add('hideSnip')
-    }
-})
-snip1Button.addEventListener('click', function () {
-    snip1.classList.toggle('hideSnip')
-    snip1Button.classList.toggle('bg-transparent')
-    if (!snip0Button.classList.contains('bg-transparent')) {
-        snip0Button.classList.add('bg-transparent')
-    }
-    if (!snip2Button.classList.contains('bg-transparent')) {
-        snip2Button.classList.add('bg-transparent')
-    }
-    if (!snip0.classList.contains('hideSnip')) {
-        snip0.classList.add('hideSnip')
-    }
-    if (!snip2.classList.contains('hideSnip')) {
-        snip2.classList.add('hideSnip')
-    }
-})
-snip2Button.addEventListener('click', function () {
-    snip2.classList.toggle('hideSnip')
-    snip2Button.classList.toggle('bg-transparent')
-    if (!snip0Button.classList.contains('bg-transparent')) {
-        snip0Button.classList.add('bg-transparent')
-    }
-    if (!snip1Button.classList.contains('bg-transparent')) {
-        snip1Button.classList.add('bg-transparent')
-    }
-    if (!snip0.classList.contains('hideSnip')) {
-        snip0.classList.add('hideSnip')
-    }
-    if (!snip1.classList.contains('hideSnip')) {
-        snip1.classList.add('hideSnip')
-    }
-})
-
+if (snip0Button) {
+    snip0Button.addEventListener('click', function () {
+        snip0.classList.toggle('hideSnip')
+        snip0Button.classList.toggle('bg-transparent')
+        if (!snip2Button.classList.contains('bg-transparent')) {
+            snip2Button.classList.add('bg-transparent')
+        }
+        if (!snip1Button.classList.contains('bg-transparent')) {
+            snip1Button.classList.add('bg-transparent')
+        }
+        if (!snip2.classList.contains('hideSnip')) {
+            snip2.classList.add('hideSnip')
+        }
+        if (!snip1.classList.contains('hideSnip')) {
+            snip1.classList.add('hideSnip')
+        }
+    })
+}
+if (snip1Button) {
+    snip1Button.addEventListener('click', function () {
+        snip1.classList.toggle('hideSnip')
+        snip1Button.classList.toggle('bg-transparent')
+        if (!snip0Button.classList.contains('bg-transparent')) {
+            snip0Button.classList.add('bg-transparent')
+        }
+        if (!snip2Button.classList.contains('bg-transparent')) {
+            snip2Button.classList.add('bg-transparent')
+        }
+        if (!snip0.classList.contains('hideSnip')) {
+            snip0.classList.add('hideSnip')
+        }
+        if (!snip2.classList.contains('hideSnip')) {
+            snip2.classList.add('hideSnip')
+        }
+    })
+}
+if (snip2Button) {
+    snip2Button.addEventListener('click', function () {
+        snip2.classList.toggle('hideSnip')
+        snip2Button.classList.toggle('bg-transparent')
+        if (!snip0Button.classList.contains('bg-transparent')) {
+            snip0Button.classList.add('bg-transparent')
+        }
+        if (!snip1Button.classList.contains('bg-transparent')) {
+            snip1Button.classList.add('bg-transparent')
+        }
+        if (!snip0.classList.contains('hideSnip')) {
+            snip0.classList.add('hideSnip')
+        }
+        if (!snip1.classList.contains('hideSnip')) {
+            snip1.classList.add('hideSnip')
+        }
+    })
+}
 let toDelete
-let deleteDict
 
 document.querySelector('#searchResults').addEventListener('click', function (event) {
     if (event.target && event.target.matches('.deleteButton')) {
         toDelete = event.target.dataset['pk']
 
-        deleteDict = {
-            "pk": toDelete,
-        }
         fetch(`http://localhost:8000/delete/${toDelete}`, {
             method: 'DELETE',
-            body: JSON.stringify(deleteDict),
             headers: new Headers({
                 'Content-Type': 'application/json'
             })
@@ -237,6 +236,24 @@ document.querySelector('#searchResults').addEventListener('click', function (eve
         document.querySelector(`.snippetDeleteButton${toDelete}`).style.display = 'none'
     }
 })
+
+if (document.querySelector('#snippetHome')) {
+    document.querySelector('#snippetHome').addEventListener('click', function (event) {
+        if (event.target && event.target.matches('.deleteButton')) {
+            console.log('ugggh')
+            toDelete = event.target.dataset['pk']
+            console.log(toDelete)
+
+            fetch(`http://localhost:8000/delete/${toDelete}`, {
+                method: 'DELETE',
+                headers: new Headers({
+                    'Content-Type': 'application/json'
+                })
+            })
+            document.querySelector(`.snippet${toDelete}`).innerHTML = "<p class='alert-danger'>Your Snippet has been deleted!</p>"
+        }
+    })
+}
 },{"./prism.js":2}],2:[function(require,module,exports){
 (function (global){
 /* PrismJS 1.16.0
