@@ -41,7 +41,7 @@ function displayResults(key) {
     <div id="snippet${ key.pk}" class="card bg-transparent shadow-sm">
             <p class="card-header snippet-title"><span class="font-weight-bold">${key.title} </span></p>
             <div class="card-body">
-            <p class="card-text">${key.user} | Added on: ${key.date} | Copied <span id="timesCopied">${key.num_times_copied}</span> times</p>
+            <p class="card-text">${key.user} | Added on: ${key.date} | Copied <span id="timesCopied${key.pk}">${key.num_times_copied}</span> times</p>
             <p class="card-text text-secondary">${key.description} </p>
     <div class='code-toolbar'>	
         <pre class='line-numbers language-${key.language.toLowerCase()}'><code class='language-${key.language.toLowerCase()}'>${escapeHtml(key.code)}</code></pre>
@@ -154,7 +154,7 @@ document.querySelector('#searchResults').addEventListener('click', function (eve
             .catch(error => console.error('Error:', error));
         let copySuccess = '#copySuccess' + copyOriginal
         document.querySelector(copySuccess).innerHTML = '<p>You made a copy to your profile!</p>'
-        document.querySelector(`#timesCopied`).innerHTML = `${timesCopied}`
+        document.querySelector(`#timesCopied${copyOriginal}`).innerHTML = `${timesCopied}`
     }
 })
 
