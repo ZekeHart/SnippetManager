@@ -18,7 +18,7 @@ from core.models import Snippet, Language
 
 
 def index(request):
-    most_recent = Snippet.objects.order_by('date')[:3]
+    most_recent = Snippet.objects.order_by('-date')[:3]
     if request.method == "GET":
         search_text = request.GET.get('search_text', '')
         if search_text is not None and search_text != u"":
