@@ -38,8 +38,14 @@
     <div id="snip0" class="hideSnip snippetBot">
         <div class="snippet card bg-light shadow-sm">
             <div class="card-body">
-                <p class="card-text">Created by: {{ snip0.user.username }}</p>
-                <p class="card-text text-secondary">{{ snip0.description }} </p>
+                <div class="cardTop">
+                    <div class="cardDesc">
+                        <p class="card-text">Created by: {{ snip0.user.username }}</p>
+                        <p class="card-text text-secondary">{{ snip0.description }} </p>
+                    </div>
+                    <div><button class="copyButton btn btn-primary mx-auto snippetCopyButton${key.pk}">Add to your
+                            Library</button></div>
+                </div>
                 <pre class='line-numbers'><code class="language-{{ snip0.language }}"><strong>### {{ snip0.language }} ###</strong>
 
 {{ snip0.code }}</code></pre>
@@ -49,8 +55,14 @@
     <div id="snip1" class="hideSnip snippetBot">
         <div class="snippet card bg-light shadow-sm">
             <div class="card-body">
-                <p class="card-text">Created by: {{ snip1.user.username }}</p>
-                <p class="card-text text-secondary">{{ snip1.description }} </p>
+                <div class="cardTop">
+                    <div class="cardDesc">
+                        <p class="card-text">Created by: {{ snip1.user.username }}</p>
+                        <p class="card-text text-secondary">{{ snip1.description }} </p>
+                    </div>
+                    <div><button class="copyButton btn btn-primary mx-auto snippetCopyButton${key.pk}">Add to your
+                            Library</button></div>
+                </div>
                 <pre class='line-numbers'><code class="language-{{ snip1.language }}"><strong>### {{ snip1.language }} ###</strong>
 
 {{ snip1.code }}</code></pre>
@@ -60,8 +72,14 @@
     <div id="snip2" class="hideSnip snippetBot">
         <div class="snippet card bg-light shadow-sm">
             <div class="card-body">
-                <p class="card-text">Created by: {{ snip2.user.username }}</p>
-                <p class="card-text text-secondary">{{ snip2.description }} </p>
+                <div class="cardTop">
+                    <div class="cardDesc">
+                        <p class="card-text">Created by: {{ snip2.user.username }}</p>
+                        <p class="card-text text-secondary">{{ snip2.description }} </p>
+                    </div>
+                    <div><button class="copyButton btn btn-primary mx-auto snippetCopyButton${key.pk}">Add to your
+                            Library</button></div>
+                </div>
                 <pre class='line-numbers'><code class="language-{{ snip2.language }}"><strong>### {{ snip2.language }} ###</strong>
 
 {{ snip2.code }}</code></pre>
