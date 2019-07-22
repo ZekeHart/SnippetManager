@@ -213,18 +213,13 @@ snip2Button.addEventListener('click', function () {
 })
 
 let toDelete
-let deleteDict
 
 document.querySelector('#searchResults').addEventListener('click', function (event) {
     if (event.target && event.target.matches('.deleteButton')) {
         toDelete = event.target.dataset['pk']
 
-        deleteDict = {
-            "pk": toDelete,
-        }
         fetch(`http://localhost:8000/delete/${toDelete}`, {
             method: 'DELETE',
-            body: JSON.stringify(deleteDict),
             headers: new Headers({
                 'Content-Type': 'application/json'
             })
