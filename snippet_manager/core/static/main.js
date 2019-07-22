@@ -239,20 +239,23 @@ document.querySelector('#searchResults').addEventListener('click', function (eve
 
 
 if (document.querySelector('#snippetHome')) {
-    document.querySelector('#snippetHome').addEventListener('click', function (event) {
-        if (event.target && event.target.matches('.deleteButton')) {
-            console.log('ugggh')
-            toDelete = event.target.dataset['pk']
-            console.log(toDelete)
+    let snippetList = document.querySelectorAll('#snippetHome')
+    for (snippet of snippetList) {
+        snippet.addEventListener('click', function (event) {
+            if (event.target && event.target.matches('.deleteButton')) {
+                console.log('ugggh')
+                toDelete = event.target.dataset['pk']
+                console.log(toDelete)
 
-            fetch(`http://localhost:8000/delete/${toDelete}`, {
-                method: 'DELETE',
-                headers: new Headers({
-                    'Content-Type': 'application/json'
+                fetch(`http://localhost:8000/delete/${toDelete}`, {
+                    method: 'DELETE',
+                    headers: new Headers({
+                        'Content-Type': 'application/json'
+                    })
                 })
-            })
-            document.querySelector(`.snippet${toDelete}`).innerHTML = "<p class='alert-danger'>Your Snippet has been deleted!</p>"
-        }
-    })
+                document.querySelector(`.snippet${toDelete}`).innerHTML = "<p class='alert-danger'>Your Snippet has been deleted!</p>"
+            }
+        })
+    }
 }
 
