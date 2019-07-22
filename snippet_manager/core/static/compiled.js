@@ -128,7 +128,6 @@ document.querySelector('#searchResults').addEventListener('click', function (eve
         copyCode = decodeURI(event.target.dataset['code'])
         copyOriginal = event.target.dataset['pk']
         copyDescription = event.target.dataset['description']
-        copyDate = new Date()
 
         copyDict = {
             "language": copyLanguage,
@@ -155,6 +154,46 @@ document.querySelector('#searchResults').addEventListener('click', function (eve
 
     }
 })
+
+let cardNumber
+
+if (document.querySelector('.snippetWindow')) {
+    document.querySelector('.snippetWindow').addEventListener('click', function (event) {
+        if (event.target && event.target.matches('.copyButton')) {
+            console.log('blah')
+            copyTitle = event.target.dataset['title']
+            copyLanguage = event.target.dataset['language']
+            copyCode = decodeURI(event.target.dataset['code'])
+            copyOriginal = event.target.dataset['pk']
+            copyDescription = event.target.dataset['description']
+            cardNumber = event.target.dataset['cardNumber']
+
+            copyDict = {
+                "language": copyLanguage,
+                "title": copyTitle,
+                "code": copyCode,
+                "user": copyUser,
+                "original": copyOriginal,
+                "description": copyDescription,
+                "date": getDate()
+            }
+            // console.log(copyDict)
+            console.log(JSON.stringify(copyDict))
+            fetch('http://localhost:8000/snippets/', {
+                method: 'POST',
+                body: JSON.stringify(copyDict),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            }).then(res => res.json())
+                .then(response => console.log('Success:', JSON.stringify(response)))
+                .catch(error => console.error('Error:', error));
+
+            document.querySelector(`.copyCardSuccess${cardNumber}`).innerHTML = '<p class="alert-primary">You made a copy to your profile!</p>'
+
+        }
+    })
+}
 
 function getDate() {
     let today = new Date();
@@ -260,6 +299,11 @@ if (document.querySelector('#snippetHome')) {
     }
 }
 
+// if (document.querySelector('.snippetWindow')) {
+//     document.addEventListener("DOMContentLoaded", function () {
+//         document.querySelector('#recentSnipButton0').innerHTML = ''
+//     }
+// }
 
 },{"./prism.js":2}],2:[function(require,module,exports){
 (function (global){

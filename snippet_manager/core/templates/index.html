@@ -43,8 +43,14 @@
                         <p class="card-text">Created by: {{ snip0.user.username }}</p>
                         <p class="card-text text-secondary">{{ snip0.description }} </p>
                     </div>
-                    <div><button class="copyButton btn btn-primary mx-auto snippetCopyButton${key.pk}">Add to your
-                            Library</button></div>
+                    <div><button id="recentSnipButton0" class="copyButton btn btn-primary mx-auto"
+                            data-pk="{{snip0.pk}}" data-title="{{snip0.title}}" data-language="{{snip0.language}}"
+                            data-description="{{snip0.description}}" data-code="{{ snip0.code }}"
+                            data-card-number="0">Add to your
+                            Library</button>
+                        <div class="copyCardSuccess0"></div>
+                    </div>
+
                 </div>
                 <pre class='line-numbers'><code class="language-{{ snip0.language }}"><strong>### {{ snip0.language }} ###</strong>
 
@@ -60,8 +66,13 @@
                         <p class="card-text">Created by: {{ snip1.user.username }}</p>
                         <p class="card-text text-secondary">{{ snip1.description }} </p>
                     </div>
-                    <div><button class="copyButton btn btn-primary mx-auto snippetCopyButton${key.pk}">Add to your
-                            Library</button></div>
+                    <div><button id="recentSnipButton1" class="copyButton btn btn-primary mx-auto"
+                            data-pk="{{snip1.pk}}" data-title="{{snip1.title}}" data-language="{{snip1.language}}"
+                            data-description="{{snip1.description}}" data-code="{{ snip1.code }}"
+                            data-card-number="1">Add to your
+                            Library</button>
+                        <div class="copyCardSuccess1"></div>
+                    </div>
                 </div>
                 <pre class='line-numbers'><code class="language-{{ snip1.language }}"><strong>### {{ snip1.language }} ###</strong>
 
@@ -77,8 +88,14 @@
                         <p class="card-text">Created by: {{ snip2.user.username }}</p>
                         <p class="card-text text-secondary">{{ snip2.description }} </p>
                     </div>
-                    <div><button class="copyButton btn btn-primary mx-auto snippetCopyButton${key.pk}">Add to your
-                            Library</button></div>
+                    <div><button id="recentSnipButton2" class="copyButton btn btn-primary mx-auto"
+                            data-pk="{{snip2.pk}}" data-title="{{snip2.title}}" data-language="{{snip2.language}}"
+                            data-description="{{snip2.description}}" data-code="{{ snip2.code }}"
+                            data-card-number="2">Add to your
+                            Library</button>
+                        <div class="copyCardSuccess2"></div>
+                    </div>
+
                 </div>
                 <pre class='line-numbers'><code class="language-{{ snip2.language }}"><strong>### {{ snip2.language }} ###</strong>
 
