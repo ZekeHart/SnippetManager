@@ -51,7 +51,7 @@ def add_snippet(request):
                 code=form.cleaned_data['code'],
                 user=request.user)
             snippet.save()
-            return HttpResponseRedirect('user-home', args=[request.user.username])
+            return HttpResponseRedirect(reverse('user-home', args=[request.user.username]))
     else:
         form = addSnippet()
 
