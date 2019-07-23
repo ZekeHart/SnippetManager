@@ -159,3 +159,5 @@ from djangocodemirror.settings import *
 from djangocodemirror.helper import codemirror_settings_update
 
 CODEMIRROR_SETTINGS = codemirror_settings_update(CODEMIRROR_SETTINGS, {'lineNumbers': True, 'indentWithTabs': True})
+
+ACCOUNT_LOGOUT_ON_GET = True
