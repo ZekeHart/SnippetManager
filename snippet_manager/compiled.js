@@ -1,1 +1,0 @@
-console.error("\n/Users/zeke/Documents/MomentumAssignments/w8-group-project-2-run-dmz/snippet_manager/core/static/main.js:7\nconst searchButton = document.querySelector('#searchButton')\n^\nParseError: Unexpected token");
