@@ -12,6 +12,8 @@
 <h2 class="h2">Recent snippets</h2>
 <br>
 {% if snip0 %}
+{% if snip1 %}
+{% if snip2 %}
 <div class="recentSnips">
     <div class="snippetTop card bg-transparent bg-light shadow-sm" id="snip0Button">
         <p class="card-header font-weight-bold">{{ snip0.title }}</p>
@@ -106,5 +108,7 @@
     </div>
 
 </div>
+{% endif %}
+{% endif %}
 {% endif %}
 {% endblock %}
