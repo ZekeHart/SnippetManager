@@ -40,7 +40,7 @@ function displayResults(key) {
     <div id="snippet${ key.pk}" class="card bg-transparent shadow-sm">
             <p class="card-header snippet-title"><span class="font-weight-bold">${key.title} </span></p>
             <div class="card-body">
-            <p class="card-text">${key.user} | Added on: ${key.date} | Copied ${key.num_times_copied} times</p>
+            <p class="card-text">${key.user_username} | Added on: ${key.date} | Copied ${key.num_times_copied} times</p>
             <p class="card-text text-secondary">${key.description} </p>
     <div class='code-toolbar'>	
         <pre class='line-numbers language-${key.language.toLowerCase()}'><code class='language-${key.language.toLowerCase()}'>${escapeHtml(key.code)}</code></pre>
@@ -50,7 +50,7 @@ function displayResults(key) {
     console.log('copyUser:', copyUser)
     if (document.querySelector('#loggedIn')) {
         resultsDiv.innerHTML += `<div class="alert-primary" id="copySuccess${key.pk}"></div><div class="alert-danger" id="deleteSuccess${key.pk}"></div>
-<button class="copyButton btn btn-primary mx-auto snippetCopyButton${key.pk}" data-pk="${key.pk}" data-title="${key.title}" data-language="${key.language.pk}" data-description="${key.description}" data-code="${key.code}">Add to your Library</button>`
+<button class="copyButton btn btn-primary mx-auto snippetCopyButton${key.pk}" data-pk="${key.pk}" data-title="${key.title}" data-language="${key.language}" data-description="${key.description}" data-code="${key.code}">Add to your Library</button>`
         if (key.user == copyUser) {
             resultsDiv.innerHTML += `<button class="deleteButton btn btn-danger snippetDeleteButton${key.pk}" data-pk="${key.pk}">Delete</button>`
         }
@@ -104,7 +104,9 @@ searchInput.addEventListener('input', function () {
 
 let editorLangSelect = document.querySelector("#id_language");
 if (editorLangSelect) {
+    console.log('poop')
     editorLangSelect.addEventListener("change", function () {
+        console.log('woooooooooooooooooooo')
         code_codemirror.setOption("mode", editorLangSelect.value.toLowerCase())
     })
 }
