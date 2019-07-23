@@ -32,6 +32,7 @@ if (document.querySelector('#loggedIn')) {
     var copyUsername = document.querySelector('#loggedIn').dataset['userstring']
 }
 
+// Displays search results
 function displayResults(key) {
     const resultsDiv = document.createElement('div')
     resultsDiv.classList.add('snippet')
@@ -58,6 +59,7 @@ function displayResults(key) {
     return resultsDiv
 }
 
+// Main search execution
 searchButton.addEventListener('click', function () {
     searchBox.querySelector('input').focus()
     searchTerm = searchBox.querySelector('input').value
@@ -69,7 +71,6 @@ searchButton.addEventListener('click', function () {
     } else if (dropDownChoice === 'snippet') {
         ifOwn = ''
     }
-    console.log('ahhhhh')
     fetch(`http://localhost:8000/${searchAttr.value}/?search=${cleanSearch}%20${ifOwn}`)
         .then(function (response) {
             return response.json()
@@ -118,6 +119,7 @@ let copyCode
 let copyOriginal
 let copyDescription
 let copyDict
+let timesCopied
 
 const copyButton = document.querySelector('#copyButton')
 
@@ -125,10 +127,11 @@ document.querySelector('#searchResults').addEventListener('click', function (eve
     if (event.target && event.target.matches('.copyButton')) {
         copyTitle = event.target.dataset['title']
         copyLanguage = event.target.dataset['language']
-        copyCode = event.target.dataset['code']
+        copyCode = decodeURI(event.target.dataset['code'])
         copyOriginal = event.target.dataset['pk']
         copyDescription = event.target.dataset['description']
-        copyDate = new Date()
+        timesCopied = (parseInt(event.target.dataset['timesCopied']) + 1)
+
 
         copyDict = {
             "language": copyLanguage,
@@ -152,9 +155,49 @@ document.querySelector('#searchResults').addEventListener('click', function (eve
             .catch(error => console.error('Error:', error));
         let copySuccess = '#copySuccess' + copyOriginal
         document.querySelector(copySuccess).innerHTML = '<p>You made a copy to your profile!</p>'
-
+        document.querySelector(`#timesCopied${copyOriginal}`).innerHTML = `${timesCopied}`
     }
 })
+
+let cardNumber
+
+if (document.querySelector('.snippetWindow')) {
+    document.querySelector('.snippetWindow').addEventListener('click', function (event) {
+        if (event.target && event.target.matches('.copyButton')) {
+            console.log('blah')
+            copyTitle = event.target.dataset['title']
+            copyLanguage = event.target.dataset['language']
+            copyCode = decodeURI(event.target.dataset['code'])
+            copyOriginal = event.target.dataset['pk']
+            copyDescription = event.target.dataset['description']
+            cardNumber = event.target.dataset['cardNumber']
+
+            copyDict = {
+                "language": copyLanguage,
+                "title": copyTitle,
+                "code": copyCode,
+                "user": copyUser,
+                "original": copyOriginal,
+                "description": copyDescription,
+                "date": getDate()
+            }
+            // console.log(copyDict)
+            console.log(JSON.stringify(copyDict))
+            fetch('http://localhost:8000/snippets/', {
+                method: 'POST',
+                body: JSON.stringify(copyDict),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            }).then(res => res.json())
+                .then(response => console.log('Success:', JSON.stringify(response)))
+                .catch(error => console.error('Error:', error));
+
+            document.querySelector(`.copyCardSuccess${cardNumber}`).innerHTML = '<p class="alert-primary">You made a copy to your profile!</p>'
+
+        }
+    })
+}
 
 function getDate() {
     let today = new Date();
@@ -240,20 +283,28 @@ document.querySelector('#searchResults').addEventListener('click', function (eve
 
 
 if (document.querySelector('#snippetHome')) {
-    document.querySelector('#snippetHome').addEventListener('click', function (event) {
-        if (event.target && event.target.matches('.deleteButton')) {
-            console.log('ugggh')
-            toDelete = event.target.dataset['pk']
-            console.log(toDelete)
+    let snippetList = document.querySelectorAll('#snippetHome')
+    for (snippet of snippetList) {
+        snippet.addEventListener('click', function (event) {
+            if (event.target && event.target.matches('.deleteButton')) {
+                console.log('ugggh')
+                toDelete = event.target.dataset['pk']
+                console.log(toDelete)
 
-            fetch(`http://localhost:8000/delete/${toDelete}`, {
-                method: 'DELETE',
-                headers: new Headers({
-                    'Content-Type': 'application/json'
+                fetch(`http://localhost:8000/delete/${toDelete}`, {
+                    method: 'DELETE',
+                    headers: new Headers({
+                        'Content-Type': 'application/json'
+                    })
                 })
-            })
-            document.querySelector(`.snippet${toDelete}`).innerHTML = "<p class='alert-danger'>Your Snippet has been deleted!</p>"
-        }
-    })
+                document.querySelector(`.snippet${toDelete}`).innerHTML = "<p class='alert-danger'>Your Snippet has been deleted!</p>"
+            }
+        })
+    }
 }
 
+// if (document.querySelector('.snippetWindow')) {
+//     document.addEventListener("DOMContentLoaded", function () {
+//         document.querySelector('#recentSnipButton0').innerHTML = ''
+//     }
+// }

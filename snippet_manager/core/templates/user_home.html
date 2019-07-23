@@ -20,7 +20,7 @@
             data-pk="{{ snippet.pk }}">Delete</button>
         <a href="/snippets/{{ snippet.pk }}">Snippet Detail Page</a>
         {% if snippet.original %}
-        <a href="{{ snippet.original.get_absolute_url }}">Original Snippet Detail Page</a>
+        <p><a href="{{ snippet.original.get_absolute_url }}">Original Snippet Detail Page</a></p>
         {% endif %}
     </div>
 </div> {% endfor %} {% else %} <h2>You haven't made any Snippets yet</h2>
