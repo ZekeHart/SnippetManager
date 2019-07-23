@@ -117,8 +117,6 @@ def snippet_detail(request, pk):
 
 class SnippetList(generics.ListCreateAPIView):
     queryset = Snippet.objects.all()
-    for snippet in queryset:
-        snippet.times_copied = Snippet.objects.filter(original=snippet).count()
     serializer_class = SnippetSerializer
     filter_backends = [filters.SearchFilter]
     search_fields = [
