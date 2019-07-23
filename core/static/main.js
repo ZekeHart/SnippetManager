@@ -71,7 +71,7 @@ searchButton.addEventListener('click', function () {
     } else if (dropDownChoice === 'snippet') {
         ifOwn = ''
     }
-    fetch(`http://localhost:8000/${searchAttr.value}/?search=${cleanSearch}%20${ifOwn}`)
+    fetch(`https://snipmanager.herokuapp.com//${searchAttr.value}/?search=${cleanSearch}%20${ifOwn}`)
         .then(function (response) {
             return response.json()
         })
@@ -144,7 +144,7 @@ document.querySelector('#searchResults').addEventListener('click', function (eve
         }
         // console.log(copyDict)
         console.log(JSON.stringify(copyDict))
-        fetch('http://localhost:8000/snippets/', {
+        fetch('https://snipmanager.herokuapp.com//snippets/', {
             method: 'POST',
             body: JSON.stringify(copyDict),
             headers: {
@@ -183,7 +183,7 @@ if (document.querySelector('.snippetWindow')) {
             }
             // console.log(copyDict)
             console.log(JSON.stringify(copyDict))
-            fetch('http://localhost:8000/snippets/', {
+            fetch('https://snipmanager.herokuapp.com//snippets/', {
                 method: 'POST',
                 body: JSON.stringify(copyDict),
                 headers: {
@@ -267,7 +267,7 @@ document.querySelector('#searchResults').addEventListener('click', function (eve
     if (event.target && event.target.matches('.deleteButton')) {
         toDelete = event.target.dataset['pk']
 
-        fetch(`http://localhost:8000/delete/${toDelete}`, {
+        fetch(`https://snipmanager.herokuapp.com//delete/${toDelete}`, {
             method: 'DELETE',
             headers: new Headers({
                 'Content-Type': 'application/json'
@@ -291,7 +291,7 @@ if (document.querySelector('#snippetHome')) {
                 toDelete = event.target.dataset['pk']
                 console.log(toDelete)
 
-                fetch(`http://localhost:8000/delete/${toDelete}`, {
+                fetch(`https://snipmanager.herokuapp.com//delete/${toDelete}`, {
                     method: 'DELETE',
                     headers: new Headers({
                         'Content-Type': 'application/json'
